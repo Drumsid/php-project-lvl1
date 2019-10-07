@@ -8,8 +8,7 @@
         }
     ],
     "bin": [
-        "bin/brain-games",
-        "bin/denis"
+        "bin/brain-games"
     ],
     "require": {}
 }
