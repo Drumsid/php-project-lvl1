@@ -1,0 +1,15 @@
+{
+    "name": "drumsid/phpproject1",
+    "description": "test 1 php project",
+    "authors": [
+        {
+            "name": "Denis Solo",
+            "email": "den-sidnay@yandex.ru"
+        }
+    ],
+    "bin": [
+        "bin/brain-games",
+        "bin/denis"
+    ],
+    "require": {}
+}
