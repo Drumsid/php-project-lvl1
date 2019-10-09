@@ -3,7 +3,6 @@
 namespace BrainGames\evenGames;
 
 use function cli\line;
-
 use function cli\prompt;
 
 // генерирует число и проверяет положительное оно или нет, вернет массив [num, bool]
