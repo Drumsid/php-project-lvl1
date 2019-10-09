@@ -16,6 +16,8 @@ $answer = '';
 
 $name = "";
 
+$compareAnswer = "";
+
 $result = 0;
 
 
@@ -25,18 +27,26 @@ print_r("Welcome to the Brain Games!\nAnswer 'yes' if the number is even, otherw
 // ask name user
 $name = BrainGames\Cli\run();
 
+// start the game
+while (true) {
 
-// generate number
-$arrNumEven = BrainGames\evenGames\generateNum();
+  // generate number
+  $arrNumEven = BrainGames\evenGames\generateNum();
 
+  // ask isEven number?
+  $answer = BrainGames\evenGames\askQuestion($arrNumEven);
 
-// ask isEven number?
-$answer = BrainGames\evenGames\askQuestion($arrNumEven);
+  // compare answer and num
+  $compareAnswer = BrainGames\evenGames\isCorrectAnswer($answer, $arrNumEven['even'], $name);
 
-
-// compare answer and num
-BrainGames\evenGames\isCorrectAnswer($answer, $arrNumEven['even'], $name);
-
-
-
-
+  if ($compareAnswer == 1) {
+    $result++;
+  } elseif ($compareAnswer == 0) {
+    $result = 0;
+  }
+  
+// Congratulations
+  if ($result == 3) {
+    BrainGames\evenGames\myCongratz($name);
+  }
+}
