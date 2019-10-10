@@ -1,0 +1,37 @@
+#!/usr/bin/env php
+<?php
+
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+$result = "";
+
+print_r("Welcome to the Brain Games!\nWhat is the result of the expression?\n");
+
+// ask name user
+$name = BrainGames\Cli\run();
+
+while(true){
+  //generate expression array
+  $exp = BrainGames\calcGames\genRandExp();
+
+  // ask question
+  $answer = BrainGames\calcGames\askQuestion($exp);
+
+  // ask question
+  $corectAnswer = BrainGames\calcGames\isCorrectAnswer($answer, $exp, $name);
+
+  if ($corectAnswer == 1) {
+    $result++;
+  }
+
+// Congratulations
+  if ($result == 3) {
+    BrainGames\evenGames\myCongratz($name);
+  }
+}
