@@ -32,7 +32,7 @@ function isCorrectAnswer($userAnswer, $corectAnswer, $name, $expStr = null)
         line("Question: {$expStr}");
         line("Your answer: {$userAnswer}");
         line("{$userAnswer} is wrong answer ;(. Correct answer was {$corectAnswer}. Let's try again, {$name}!");
-        // die;
+        die;
     } else {
         line("Correct!");
         return 1;
