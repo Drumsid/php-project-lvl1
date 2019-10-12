@@ -44,9 +44,9 @@ while (true) {
   } elseif ($compareAnswer == 0) {
     $result = 0;
   }
-  
+
 // Congratulations
   if ($result == 3) {
-    BrainGames\evenGames\myCongratz($name);
+    BrainGames\Cli\myCongratz($name);
   }
 }

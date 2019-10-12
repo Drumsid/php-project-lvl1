@@ -47,10 +47,3 @@ function isCorrectAnswer($answer, $evenOrNot, $name)
         return 0;
     }
 }
-
-// Congratulations
-function myCongratz($name)
-{
-    line("Congratulations, %s!", $name);
-    die;
-}

@@ -17,11 +17,14 @@ print_r("Welcome to the Brain Games!\nWhat is the result of the expression?\n");
 $name = BrainGames\Cli\run();
 
 while(true){
-  //generate expression array
-  $exp = BrainGames\calcGames\genRandExp();
+  //generate Num array
+  $expNum = BrainGames\Cli\genNumArr();
+
+//generate exp
+  $exp = BrainGames\calcGames\addSign($expNum);
 
   // ask question
-  $answer = BrainGames\calcGames\askQuestion($exp);
+  $answer = BrainGames\Cli\askQuestion($exp);
 
   // ask question
   $corectAnswer = BrainGames\calcGames\isCorrectAnswer($answer, $exp, $name);
@@ -32,6 +35,6 @@ while(true){
 
 // Congratulations
   if ($result == 3) {
-    BrainGames\evenGames\myCongratz($name);
+    BrainGames\Cli\myCongratz($name);
   }
 }

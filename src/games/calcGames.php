@@ -14,21 +14,11 @@ function randomSign()
 }
 
 
-// generate random expression
-// return
-//     Array
-//     (
-//         [firstNum] => 25
-//         [sign] => +
-//         [secondNum] => 42
-//     )
-function genRandExp()
+// add sign to array of number;
+function addSign($arr)
 {
-    $res = [];
-    $res['firstNum'] = rand(1, 50);
-    $res['sign'] = randomSign();
-    $res['secondNum'] = rand(1, 50);
-    return $res;
+    $arr['sign'] = randomSign();
+    return $arr;
 }
 
 // принимает массив типа
@@ -50,26 +40,7 @@ function countExp($arr)
     }
 }
 
-// expression array to string
-//     Array
-//     (
-//         [firstNum] => 25
-//         [sign] => +
-//         [secondNum] => 42
-//     )
-//   return =>  "25 + 42"
-function expToString($arr)
-{
-    return "{$arr['firstNum']}  {$arr['sign']}  {$arr['secondNum']}";
-}
-// задаем вопрос пользователю
-function askQuestion($arr)
-{
-    $strExp = expToString($arr);
-    line("Question: {$strExp}");
-    $answer = prompt("Your answer");
-    return $answer;
-}
+
 
 // корректный ли ответ?
 function isCorrectAnswer($answer, $exp, $name)

@@ -1,0 +1,46 @@
+#!/usr/bin/env php
+<?php
+
+$autoloadPath1 = __DIR__ . '/../../../autoload.php';
+$autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($autoloadPath1)) {
+    require_once $autoloadPath1;
+} else {
+    require_once $autoloadPath2;
+}
+
+$result = "";
+
+print_r("Welcome to the Brain Games!\nFind the greatest common divisor of given numbers.\n");
+
+// ask name user
+$name = BrainGames\Cli\run();
+
+while (true) {
+  //generate Num array
+  $expNum = BrainGames\Cli\genNumArr();
+
+  // add space
+  $exp = BrainGames\gcdGames\addSpaseSign($expNum);
+
+  // ask question
+  $userAnswer = BrainGames\Cli\askQuestion($exp);
+
+  //is correct answer
+  $corectAnswer = BrainGames\gcdGames\gcd($expNum);
+
+  // exp to string
+  $expStr = BrainGames\Cli\expToString($exp);
+
+  //is correct answer?
+  $compareAnswer = BrainGames\gcdGames\isCorrectAnswer($userAnswer, $corectAnswer, $name, $expStr);
+
+    if ($compareAnswer == 1) {
+      $result++;
+    }
+
+  // Congratulations
+    if ($result == 3) {
+      BrainGames\Cli\myCongratz($name);
+    }
+}
