@@ -29,7 +29,7 @@
             "src/games/evenGames.php",
             "src/games/calcGames.php",
             "src/games/gcdGames.php",
-            "src/games/brain-progression"
+            "src/games/progressionGames.php"
         ]
     }
 }
