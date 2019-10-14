@@ -46,22 +46,24 @@ function generateProgression()
     return $result;
 }
 
-// ask question
-function askQuestion($arrProgression)
+// get progression str from array
+function getProgression($arr)
 {
-    line("Question: {$arrProgression['progression']}");
-    $answer = prompt("Your answer");
-    return $answer;
+    return $arr['progression'];
 }
 
-// compare answer
-function isCorrectAnswer($arrProgression, $userAnswer, $name)
+// get correct answer from array
+function getCorrectAns($arr)
 {
-    if ($userAnswer != $arrProgression['correctAnswer']) {
-        line("Question: {$arrProgression['progression']}");
-        line("Your answer: {$userAnswer}");
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$arrProgression['correctAnswer']}.
-         Let's try again, {$name}!");
+    return $arr['correctAnswer'];
+}
+
+
+// compare answer
+function isCorrectAnswer($correctAnswer, $userAnswer, $name)
+{
+    if ($userAnswer != $correctAnswer) {
+        line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}. Let's try again, {$name}!");
         die;
     } else {
         line("Correct!");
