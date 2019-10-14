@@ -11,10 +11,10 @@ if (file_exists($autoloadPath1)) {
 
 $result = "";
 
-print_r("Welcome to the Brain Games!\nAnswer 'yes' if given number is prime. Otherwise answer 'no'.\n");
+$welcome = "Welcome to the Brain Games!\nAnswer 'yes' if given number is prime. Otherwise answer 'no'.\n";
 
 // ask name user
-$name = BrainGames\Cli\run();
+$name = BrainGames\Cli\run($welcome);
 
 while(true){
   // generate number
@@ -24,7 +24,7 @@ while(true){
   $isPrime = BrainGames\primeGames\is_prime($number);
 
   //ask question
-  $userAnswer = BrainGames\primeGames\askQuestion($number);
+  $userAnswer = BrainGames\Cli\askQuestion($number);
 
   //is correct answer?
   $compareAnswer = BrainGames\primeGames\isCorrectAnswer($isPrime, $userAnswer, $name);
