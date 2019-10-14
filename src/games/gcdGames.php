@@ -26,11 +26,11 @@ function addSpaseSign($arr)
 }
 
 // is correct answer?
-function isCorrectAnswer($userAnswer, $corectAnswer, $name, $expStr = null)
+function isCorrectAnswer($userAnswer, $corectAnswer, $name)
 {
     if ($userAnswer != $corectAnswer) {
-        line("Question: {$expStr}");
-        line("Your answer: {$userAnswer}");
+        // line("Question: {$expStr}");
+        // line("Your answer: {$userAnswer}");
         line("{$userAnswer} is wrong answer ;(. Correct answer was {$corectAnswer}. Let's try again, {$name}!");
         die;
     } else {

@@ -11,10 +11,10 @@ if (file_exists($autoloadPath1)) {
 
 $result = "";
 
-print_r("Welcome to the Brain Games!\nFind the greatest common divisor of given numbers.\n");
+$welcome = "Welcome to the Brain Games!\nFind the greatest common divisor of given numbers.\n";
 
 // ask name user
-$name = BrainGames\Cli\run();
+$name = BrainGames\Cli\run($welcome);
 
 while (true) {
   //generate Num array
@@ -23,17 +23,17 @@ while (true) {
   // add space
   $exp = BrainGames\gcdGames\addSpaseSign($expNum);
 
+  //exp to string
+  $expToString = BrainGames\Cli\expToString($exp);
+
   // ask question
-  $userAnswer = BrainGames\Cli\askQuestion($exp);
+  $userAnswer = BrainGames\Cli\askQuestion($expToString);
 
   //is correct answer
   $corectAnswer = BrainGames\gcdGames\gcd($expNum);
 
-  // exp to string
-  $expStr = BrainGames\Cli\expToString($exp);
-
   //is correct answer?
-  $compareAnswer = BrainGames\gcdGames\isCorrectAnswer($userAnswer, $corectAnswer, $name, $expStr);
+  $compareAnswer = BrainGames\gcdGames\isCorrectAnswer($userAnswer, $corectAnswer, $name);
 
     if ($compareAnswer == 1) {
       $result++;
