@@ -46,7 +46,7 @@ function countExp($arr)
 // корректный ли ответ?
 function isCorrectAnswer($answer, $expResult, $name)
 {
-    // $expResult = countExp($exp); 
+    // $expResult = countExp($exp);
     // $expStr = expToString($exp);
     if ($answer != $expResult) {
         // line("Question: {$expStr}");      // возможно не правильно понял тз, поэтому сделал такой вывод в консоль

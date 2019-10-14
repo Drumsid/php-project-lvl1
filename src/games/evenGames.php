@@ -28,20 +28,20 @@ function isEven($num)
 // get even or not
 function getEven($arr)
 {
-	return $arr['even'];
+    return $arr['even'];
 }
 
 // get even or not
 function getNumber($arr)
 {
-	return $arr['number'];
+    return $arr['number'];
 }
 
 
 // корректный ли ответ?
 function isCorrectAnswer($answer, $evenOrNot, $name)
 {
-	if (($answer === 'yes' && $evenOrNot === 'yes') || ($answer === 'no' && $evenOrNot === 'no')) {
+    if (($answer === 'yes' && $evenOrNot === 'yes') || ($answer === 'no' && $evenOrNot === 'no')) {
         line("Correct!");
         return 1;
     } else {
