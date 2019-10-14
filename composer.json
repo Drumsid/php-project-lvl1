@@ -1,9 +1,11 @@
 {
     "name": "drumsid/phpproject1",
-    "description": "test 1 php project",
+    "description": "mini brain games",
+    "type": "project",
+    "keywords": ["game", "cli",  "cool", "awesome"],
     "authors": [
         {
-            "name": "Denis Solo",
+            "name": "Denis Solodukhin",
             "email": "den-sidnay@yandex.ru"
         }
     ],
