@@ -4,6 +4,7 @@ namespace BrainGames\calcGames;
 
 use function cli\line;
 use function cli\prompt;
+use function BrainGames\Cli\expToString;
 
 // random znak
 function randomSign()
@@ -43,13 +44,13 @@ function countExp($arr)
 
 
 // корректный ли ответ?
-function isCorrectAnswer($answer, $exp, $name)
+function isCorrectAnswer($answer, $expResult, $name)
 {
-    $expResult = countExp($exp);
-    $expStr = expToString($exp);
+    // $expResult = countExp($exp); 
+    // $expStr = expToString($exp);
     if ($answer != $expResult) {
-        line("Question: {$expStr}");
-        line("Your answer: {$answer}");
+        // line("Question: {$expStr}");      // возможно не правильно понял тз, поэтому сделал такой вывод в консоль
+        // line("Your answer: {$answer}");   // возможно не правильно понял тз, поэтому сделал такой вывод в консоль
         line("{$answer} is wrong answer ;(. Correct answer was {$expResult}. Let's try again, {$name}!");
         die;
     } else {

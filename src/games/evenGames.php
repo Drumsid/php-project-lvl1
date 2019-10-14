@@ -31,13 +31,12 @@ function getEven($arr)
 	return $arr['even'];
 }
 
-// задаем вопрос пользователю
-function askQuestion($arr)
+// get even or not
+function getNumber($arr)
 {
-    line("Question: {$arr['number']}");
-    $answer = prompt("Your answer");
-    return $answer;
+	return $arr['number'];
 }
+
 
 // корректный ли ответ?
 function isCorrectAnswer($answer, $evenOrNot, $name)
@@ -47,6 +46,6 @@ function isCorrectAnswer($answer, $evenOrNot, $name)
         return 1;
     } else {
         line("{$answer} is wrong answer ;(. Correct answer was {$evenOrNot}. Let's try again, {$name}!");
-        return 0;
+        die;
     }
 }

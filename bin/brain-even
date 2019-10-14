@@ -10,14 +10,6 @@ if (file_exists($autoloadPath1)) {
 }
 
 
-// $arrNumEven = '';
-
-// $answer = '';
-
-// $name = "";
-
-// $compareAnswer = "";
-
 $result = 0;
 
 $welcome = "Welcome to the Brain Games!\nAnswer 'yes' if the number is even, otherwise answer 'no'.\n";
@@ -32,14 +24,17 @@ while (true) {
   // generate number
   $arrNumEven = BrainGames\evenGames\generateNum();
 
-  // ask isEven number?
-  $answer = BrainGames\evenGames\askQuestion($arrNumEven);
+  // get number from arrNumEven
+  $number = BrainGames\evenGames\getNumber($arrNumEven);
+
+  // ask question isEven number?
+  $answer = BrainGames\Cli\askQuestion($number);
 
   // get even or not value
-  $evenOrNot = BrainGames\evenGames\getEven($arrNumEven);
+  // $evenOrNot = BrainGames\evenGames\getEven($arrNumEven);
 
   // compare answer and num
-  $compareAnswer = BrainGames\evenGames\isCorrectAnswer($answer, $evenOrNot, $name);
+  $compareAnswer = BrainGames\evenGames\isCorrectAnswer($answer, BrainGames\evenGames\getEven($arrNumEven), $name);
 
   if ($compareAnswer == 1) {
     $result++;

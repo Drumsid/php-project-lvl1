@@ -50,10 +50,10 @@ function expToString($arr)
 }
 
 // задаем вопрос пользователю
-function askQuestion($arr)
+function askQuestion($val)
 {
-    $strExp = expToString($arr);
-    line("Question: {$strExp}");
+    // $strExp = expToString($arr);
+    line("Question: {$val}");
     $answer = prompt("Your answer");
     return $answer;
 }
