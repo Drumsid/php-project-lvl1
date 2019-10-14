@@ -25,6 +25,12 @@ function isEven($num)
     return 'no';
 }
 
+// get even or not
+function getEven($arr)
+{
+	return $arr['even'];
+}
+
 // задаем вопрос пользователю
 function askQuestion($arr)
 {
@@ -36,10 +42,7 @@ function askQuestion($arr)
 // корректный ли ответ?
 function isCorrectAnswer($answer, $evenOrNot, $name)
 {
-    if ($answer !== 'yes' && $answer !== 'no') {
-        line("The answer can be only 'yes' or 'no'. Let's try again, {$name}!");
-        return 0;
-    } elseif (($answer === 'yes' && $evenOrNot === 'yes') || ($answer === 'no' && $evenOrNot === 'no')) {
+	if (($answer === 'yes' && $evenOrNot === 'yes') || ($answer === 'no' && $evenOrNot === 'no')) {
         line("Correct!");
         return 1;
     } else {

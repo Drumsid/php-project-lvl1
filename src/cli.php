@@ -6,8 +6,9 @@ use function cli\line;
 use function cli\prompt;
 
 // Welcome
-function run()
+function run($welcome)
 {
+    line($welcome);
     $name = prompt('May I have your name', $default = false, "? ");
     line("Hello, %s!", $name);
     return $name;
