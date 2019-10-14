@@ -6,7 +6,7 @@
 # brain-even game
 [![asciicast](https://asciinema.org/a/PUUbf3277xCs7qtMb6K2VglSS.svg)](https://asciinema.org/a/PUUbf3277xCs7qtMb6K2VglSS)
 # brain-calc game
-[![asciicast](https://asciinema.org/a/3tQ118yIvS6rRB3X6Rh1FiLKI.svg)](https://asciinema.org/a/3tQ118yIvS6rRB3X6Rh1FiLKI)
+[![asciicast](https://asciinema.org/a/XCpEMyJ2CxutlDb3shJpWO32v.svg)](https://asciinema.org/a/XCpEMyJ2CxutlDb3shJpWO32v)
 # brain-gcd game
 [![asciicast](https://asciinema.org/a/l8h4PkYO9zVXAUd7vJSRCCltq.svg)](https://asciinema.org/a/l8h4PkYO9zVXAUd7vJSRCCltq)
 # brain-progression game
