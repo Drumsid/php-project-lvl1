@@ -3,7 +3,6 @@ php:
   - '7.2'
 
 install:
-  - composer self-update
   - make install
 
 script: make lint

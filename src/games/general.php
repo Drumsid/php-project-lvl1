@@ -1,13 +1,14 @@
 <?php
 
-namespace BrainGames\Cli;
+namespace BrainGames\General;
 
 use function cli\line;
 use function cli\prompt;
 
 // Welcome
-function run()
+function run($welcome)
 {
+    line($welcome);
     $name = prompt('May I have your name', $default = false, "? ");
     line("Hello, %s!", $name);
     return $name;
@@ -49,10 +50,10 @@ function expToString($arr)
 }
 
 // задаем вопрос пользователю
-function askQuestion($arr)
+function askQuestion($val)
 {
-    $strExp = expToString($arr);
-    line("Question: {$strExp}");
+    // $strExp = expToString($arr);
+    line("Question: {$val}");
     $answer = prompt("Your answer");
     return $answer;
 }
