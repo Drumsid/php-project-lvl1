@@ -4,7 +4,6 @@ namespace BrainGames\calcGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\Cli\expToString;
 
 // random znak
 function randomSign()
