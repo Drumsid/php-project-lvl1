@@ -9,38 +9,5 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-$result = "";
-
-$welcome = "Welcome to the Brain Games!\nWhat is the result of the expression?\n";
-
-// ask name user
-$name = BrainGames\Cli\run($welcome);
-
-while(true){
-  //generate Num array
-  $expNum = BrainGames\Cli\genNumArr();
-
-// add sign to array exp
-  $exp = BrainGames\calcGames\addSign($expNum);
-
-  //expression to string
-  $expToString = BrainGames\Cli\expToString($exp);
-
-  // ask question
-  $answer = BrainGames\Cli\askQuestion($expToString);
-
-  // count result expression
-  $expResult = BrainGames\calcGames\countExp($exp);
-
-  // compare answer
-  $corectAnswer = BrainGames\calcGames\isCorrectAnswer($answer, $expResult, $name);
-
-  if ($corectAnswer == 1) {
-    $result++;
-  }
-
-// Congratulations
-  if ($result == 3) {
-    BrainGames\Cli\myCongratz($name);
-  }
-}
+// run calc game
+BrainGames\calcGames\runCalcGame();

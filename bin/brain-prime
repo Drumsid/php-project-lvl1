@@ -9,32 +9,5 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-$result = "";
-
-$welcome = "Welcome to the Brain Games!\nAnswer 'yes' if given number is prime. Otherwise answer 'no'.\n";
-
-// ask name user
-$name = BrainGames\Cli\run($welcome);
-
-while(true){
-  // generate number
-  $number = rand(2, 100);
-
-  // is prime?
-  $isPrime = BrainGames\primeGames\is_prime($number);
-
-  //ask question
-  $userAnswer = BrainGames\Cli\askQuestion($number);
-
-  //is correct answer?
-  $compareAnswer = BrainGames\primeGames\isCorrectAnswer($isPrime, $userAnswer, $name);
-
-    if ($compareAnswer == 1) {
-      $result++;
-    }
-
-  // Congratulations
-    if ($result == 3) {
-      BrainGames\Cli\myCongratz($name);
-    }
-}
+// run prime game
+BrainGames\primeGames\runPrimeGame();

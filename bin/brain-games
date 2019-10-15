@@ -13,4 +13,4 @@ if (file_exists($autoloadPath1)) {
 
 $welcome = "Welcome to the Brain Games!\n";
 
-BrainGames\Cli\run($welcome);
+BrainGames\General\run($welcome);

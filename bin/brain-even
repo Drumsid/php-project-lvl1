@@ -8,42 +8,5 @@ if (file_exists($autoloadPath1)) {
 } else {
     require_once $autoloadPath2;
 }
-
-
-$result = 0;
-
-$welcome = "Welcome to the Brain Games!\nAnswer 'yes' if the number is even, otherwise answer 'no'.\n";
-
-
-// ask name user
-$name = BrainGames\Cli\run($welcome);
-
-// start the game
-while (true) {
-
-  // generate number
-  $arrNumEven = BrainGames\evenGames\generateNum();
-
-  // get number from arrNumEven
-  $number = BrainGames\evenGames\getNumber($arrNumEven);
-
-  // ask question isEven number?
-  $answer = BrainGames\Cli\askQuestion($number);
-
-  // get even or not value
-  // $evenOrNot = BrainGames\evenGames\getEven($arrNumEven);
-
-  // compare answer and num
-  $compareAnswer = BrainGames\evenGames\isCorrectAnswer($answer, BrainGames\evenGames\getEven($arrNumEven), $name);
-
-  if ($compareAnswer == 1) {
-    $result++;
-  } elseif ($compareAnswer == 0) {
-    $result = 0;
-  }
-
-// Congratulations
-  if ($result == 3) {
-    BrainGames\Cli\myCongratz($name);
-  }
-}
+// run the even game
+BrainGames\evenGames\runEvenGame();

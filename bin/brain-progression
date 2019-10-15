@@ -9,35 +9,5 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-$result = "";
-
-$welcome = "Welcome to the Brain Games!\nWhat number is missing in the progression?\n";
-
-// ask name user
-$name = BrainGames\Cli\run($welcome);
-
-while (true) {
-    // generate progression and correct answer
-    $arrProgression = BrainGames\progressionGame\generateProgression();
-
-    // get progression str from array
-    $progressionStr = BrainGames\progressionGame\getProgression($arrProgression);
-
-    //ask question
-    $userAnswer = BrainGames\Cli\askQuestion($progressionStr);
-
-    //get correct answer
-    $correctAnswer = BrainGames\progressionGame\getCorrectAns($arrProgression);
-
-    //is correct answer?
-    $compareAnswer = BrainGames\progressionGame\isCorrectAnswer($correctAnswer, $userAnswer, $name);
-
-    if ($compareAnswer == 1) {
-      $result++;
-    }
-
-  // Congratulations
-    if ($result == 3) {
-      BrainGames\Cli\myCongratz($name);
-    }
-}
+// run progression game
+BrainGames\progressionGame\runProgressionGame();
