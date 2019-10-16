@@ -11,6 +11,5 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-$welcome = "Welcome to the Brain Games!\n";
-
-BrainGames\General\run($welcome);
+// welcom game
+BrainGames\General\welcomGame();

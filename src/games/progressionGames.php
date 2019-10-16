@@ -16,36 +16,36 @@ function randomStep()
 // genirate progression
 function generateProgression()
 {
-    $proressionInt = [];
+    $generateProgression = [];
 
-    $randCountStep = randomStep();
+    $randomCountStep = randomStep();
 
-    $randomStartNum = rand(1, 10);
+    $randomStartNumber = rand(1, 10);
 
     $randomHideKey = rand(1, 8);
 
     $result = [];
 
-    for ($i = 0, $s = $randomStartNum, $j = $s; $i < 10; $i++) {
+    for ($i = 0, $step = $randomStartNumber; $i < 10; $i++) {
         if ($i == 0) {
-            $proressionInt[] = $s;
+            $generateProgression[] = $step;
         } else {
-            $j += $randCountStep;
-            $proressionInt[] = $j;
+            $step += $randomCountStep;
+            $generateProgression[] = $step;
         }
     }
 
-    $arrRandHideNum = [];
-    foreach ($proressionInt as $k => $v) {
+    $generateRandomHideNumber = [];
+    foreach ($generateProgression as $k => $v) {
         if ($k == $randomHideKey) {
-            $arrRandHideNum[] = "..";
+            $generateRandomHideNumber[] = "..";
         } else {
-            $arrRandHideNum[] = $v;
+            $generateRandomHideNumber[] = $v;
         }
     }
 
-    $result['progression'] = implode(" ", $arrRandHideNum);
-    $result['correctAnswer'] = $proressionInt[$randomHideKey];
+    $result['progression'] = implode(" ", $generateRandomHideNumber);
+    $result['correctAnswer'] = $generateProgression[$randomHideKey];
     return $result;
 }
 
@@ -63,10 +63,10 @@ function getCorrectAnswer($arr)
 
 
 // compare answer
-function isCorrectAnswer($correctAnswer, $userAnswer, $name)
+function isCorrectAnswer($correctAnswer, $userAnswer, $userName)
 {
     if ($userAnswer != $correctAnswer) {
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}. Let's try again, {$name}!");
+        line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}. Let's try again, {$userName}!");
         die;
     } else {
         line("Correct!");
@@ -82,23 +82,23 @@ function runProgressionGame()
     $welcome = "Welcome to the Brain Games!\nWhat number is missing in the progression?\n";
 
     // ask name user
-    $name = run($welcome);
+    $userName = run($welcome);
 
     while (true) {
         // generate progression and correct answer
         $progression = generateProgression();
 
         // get progression str from array
-        $progressionStr = getProgression($progression);
+        $expressionProgression = getProgression($progression);
 
         //ask question
-        $userAnswer = askQuestion($progressionStr);
+        $userAnswer = askQuestion($expressionProgression);
 
         //get correct answer
         $correctAnswer = getCorrectAnswer($progression);
 
         //is correct answer?
-        $compareAnswer = isCorrectAnswer($correctAnswer, $userAnswer, $name);
+        $compareAnswer = isCorrectAnswer($correctAnswer, $userAnswer, $userName);
 
         if ($compareAnswer == 1) {
             $result++;
@@ -106,7 +106,7 @@ function runProgressionGame()
 
       // Congratulations
         if ($result == 3) {
-            myCongratz($name);
+            myCongratz($userName);
         }
     }
 }

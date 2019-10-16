@@ -9,20 +9,20 @@ use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
 
 // генерирует число и проверяет положительное оно или нет, вернет массив [num, bool]
-function generateNum()
+function generateNumber()
 {
     $result = [];
-    $num = rand(1, 100);
-    $bool = isEven($num);
-    $result['number'] = $num;
-    $result['even'] = $bool;
+    $number = rand(1, 100);
+    $yesOrNo = isEven($number);
+    $result['number'] = $number;
+    $result['even'] = $yesOrNo;
     return $result;
 }
 
 // проверяем положительное ли число
-function isEven($num)
+function isEven($number)
 {
-    if ($num % 2 == 0) {
+    if ($number % 2 == 0) {
         return 'yes';
     }
     return 'no';
@@ -42,13 +42,13 @@ function getNumber($arr)
 
 
 // корректный ли ответ?
-function isCorrectAnswer($answer, $evenOrNot, $name)
+function isCorrectAnswer($userAnswer, $evenOrNot, $userName)
 {
-    if (($answer === 'yes' && $evenOrNot === 'yes') || ($answer === 'no' && $evenOrNot === 'no')) {
+    if (($userAnswer === 'yes' && $evenOrNot === 'yes') || ($userAnswer === 'no' && $evenOrNot === 'no')) {
         line("Correct!");
         return 1;
     } else {
-        line("{$answer} is wrong answer ;(. Correct answer was {$evenOrNot}. Let's try again, {$name}!");
+        line("{$userAnswer} is wrong answer ;(. Correct answer was {$evenOrNot}. Let's try again, {$userName}!");
         die;
     }
 }
@@ -62,22 +62,25 @@ function runEvenGame()
 
 
     // ask name user
-    $name = run($welcome);
+    $userName = run($welcome);
 
     // start the game
     while (true) {
         // generate number
-        $numEven = generateNum();
+        $randomEvenNumber = generateNumber();
 
         // get number from arrNumEven
-        $number = getNumber($numEven);
+        $number = getNumber($randomEvenNumber);
+
+        // get even or not
+        $evenOrNot = getEven($randomEvenNumber);
 
         // ask question isEven number?
-        $answer = askQuestion($number);
+        $userAnswer = askQuestion($number);
 
 
         // compare answer and num
-        $compareAnswer = isCorrectAnswer($answer, getEven($numEven), $name);
+        $compareAnswer = isCorrectAnswer($userAnswer, $evenOrNot, $userName);
 
         if ($compareAnswer == 1) {
             $result++;
@@ -87,7 +90,7 @@ function runEvenGame()
 
       // Congratulations
         if ($result == 3) {
-            myCongratz($name);
+            myCongratz($userName);
         }
     }
 }

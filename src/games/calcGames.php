@@ -4,8 +4,8 @@ namespace BrainGames\calcGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\expToString;
-use function BrainGames\General\genNumArr;
+use function BrainGames\General\expressionToString;
+use function BrainGames\General\generateTwoRandomNumber;
 use function BrainGames\General\run;
 use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
@@ -20,7 +20,7 @@ function randomSign()
 
 
 // add sign to array of number;
-function signExpression($arr)
+function addRandomSignToExpression($arr)
 {
     $arr['sign'] = randomSign();
     return $arr;
@@ -29,33 +29,33 @@ function signExpression($arr)
 // принимает массив типа
 //     Array
 //     (
-//         [firstNum] => 25
+//         [firstNumber] => 25
 //         [sign] => +
-//         [secondNum] => 42
+//         [secondNumber] => 42
 //     )
 // return => 25 + 42 возвращает результат выражения
-function countExp($arr)
+function countExpression($arr)
 {
     if ($arr['sign'] == '+') {
-        return $arr['firstNum'] + $arr['secondNum'];
+        return $arr['firstNumber'] + $arr['secondNumber'];
     } elseif ($arr['sign'] == '-') {
-        return $arr['firstNum'] - $arr['secondNum'];
+        return $arr['firstNumber'] - $arr['secondNumber'];
     } else {
-        return $arr['firstNum'] * $arr['secondNum'];
+        return $arr['firstNumber'] * $arr['secondNumber'];
     }
 }
 
 
 
 // корректный ли ответ?
-function isCorrectAnswer($answer, $expResult, $name)
+function isCorrectAnswer($userAnswer, $expressionResult, $userName)
 {
-    // $expResult = countExp($exp);
-    // $expStr = expToString($exp);
-    if ($answer != $expResult) {
+    // $expressionResult = countExpression($exp);
+    // $expStr = expressionToString($exp);
+    if ($userAnswer != $expressionResult) {
         // line("Question: {$expStr}");      // возможно не правильно понял тз, поэтому сделал такой вывод в консоль
-        // line("Your answer: {$answer}");   // возможно не правильно понял тз, поэтому сделал такой вывод в консоль
-        line("{$answer} is wrong answer ;(. Correct answer was {$expResult}. Let's try again, {$name}!");
+        // line("Your answer: {$userAnswer}");   // возможно не правильно понял тз, поэтому сделал такой вывод в консоль
+        line("{$userAnswer} is wrong answer ;(. Correct answer was {$expressionResult}. Let's try again, {$userName}!");
         die;
     } else {
         line("Correct!");
@@ -71,26 +71,26 @@ function runCalcGame()
     $welcome = "Welcome to the Brain Games!\nWhat is the result of the expression?\n";
 
     // ask name user
-    $name = run($welcome);
+    $userName = run($welcome);
 
     while (true) {
-        //generate Num array
-        $expNum = genNumArr();
+        //generate two Numbers in array
+        $twoRandomNumber = generateTwoRandomNumber();
 
         // add sign to array exp
-        $exp = signExpression($expNum);
+        $expression = addRandomSignToExpression($twoRandomNumber);
 
         //expression to string
-        $expToString = expToString($exp);
+        $expressionToString = expressionToString($expression);
 
         // ask question
-        $answer = askQuestion($expToString);
+        $userAnswer = askQuestion($expressionToString);
 
         // count result expression
-        $expResult = countExp($exp);
+        $expressionResult = countExpression($expression);
 
         // compare answer
-        $corectAnswer = isCorrectAnswer($answer, $expResult, $name);
+        $corectAnswer = isCorrectAnswer($userAnswer, $expressionResult, $userName);
 
         if ($corectAnswer == 1) {
             $result++;
@@ -98,7 +98,7 @@ function runCalcGame()
 
         // Congratulations
         if ($result == 3) {
-            myCongratz($name);
+            myCongratz($userName);
         }
     }
 }

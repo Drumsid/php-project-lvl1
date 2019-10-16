@@ -4,23 +4,23 @@ namespace BrainGames\gcdGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\expToString;
-use function BrainGames\General\genNumArr;
+use function BrainGames\General\expressionToString;
+use function BrainGames\General\generateTwoRandomNumber;
 use function BrainGames\General\run;
 use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
 
-// find fcd
+// find fgcd
 function gcd($arr)
 {
-    while ($arr['firstNum'] != $arr['secondNum']) {
-        if ($arr['firstNum'] > $arr['secondNum']) {
-            $arr['firstNum'] -= $arr['secondNum'];
+    while ($arr['firstNumber'] != $arr['secondNumber']) {
+        if ($arr['firstNumber'] > $arr['secondNumber']) {
+            $arr['firstNumber'] -= $arr['secondNumber'];
         } else {
-            $arr['secondNum'] -= $arr['firstNum'];
+            $arr['secondNumber'] -= $arr['firstNumber'];
         }
     }
-    return $arr['firstNum'];
+    return $arr['firstNumber'];
 }
 
 // add space sign
@@ -31,10 +31,10 @@ function addSpaseSign($arr)
 }
 
 // is correct answer?
-function isCorrectAnswer($userAnswer, $corectAnswer, $name)
+function isCorrectAnswer($userAnswer, $corectAnswer, $userName)
 {
     if ($userAnswer != $corectAnswer) {
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$corectAnswer}. Let's try again, {$name}!");
+        line("{$userAnswer} is wrong answer ;(. Correct answer was {$corectAnswer}. Let's try again, {$userName}!");
         die;
     } else {
         line("Correct!");
@@ -50,26 +50,26 @@ function runGcdGame()
     $welcome = "Welcome to the Brain Games!\nFind the greatest common divisor of given numbers.\n";
 
     // ask name user
-    $name = run($welcome);
+    $userName = run($welcome);
 
     while (true) {
         //generate Num array
-        $expNum = genNumArr();
+        $twoRandomNumber = generateTwoRandomNumber();
 
         // add space
-        $exp = addSpaseSign($expNum);
+        $expression = addSpaseSign($twoRandomNumber);
 
         //exp to string
-        $expToString = expToString($exp);
+        $expressionToString = expressionToString($expression);
 
         // ask question
-        $userAnswer = askQuestion($expToString);
+        $userAnswer = askQuestion($expressionToString);
 
         //is correct answer
-        $corectAnswer = gcd($expNum);
+        $corectAnswer = gcd($twoRandomNumber);
 
         //is correct answer?
-        $compareAnswer = isCorrectAnswer($userAnswer, $corectAnswer, $name);
+        $compareAnswer = isCorrectAnswer($userAnswer, $corectAnswer, $userName);
 
         if ($compareAnswer == 1) {
             $result++;
@@ -77,7 +77,7 @@ function runGcdGame()
 
         // Congratulations
         if ($result == 3) {
-            myCongratz($name);
+            myCongratz($userName);
         }
     }
 }

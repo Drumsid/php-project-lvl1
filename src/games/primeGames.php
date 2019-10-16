@@ -9,7 +9,7 @@ use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
 
 //is prime function
-function primeNum($n)
+function primeNumber($n)
 {
     for ($x = 2; $x <= sqrt($n); $x++) {
         if ($n % $x == 0) {
@@ -22,22 +22,22 @@ function primeNum($n)
 
 
 // compare answer
-function isCorrectAnswer($primeNum, $userAnswer, $name)
+function isCorrectAnswer($primeNumber, $userAnswer, $userName)
 {
-    $correctAnswer = boolToStr($primeNum);
-    if ($primeNum === false && $userAnswer === 'no' || $primeNum === true && $userAnswer === 'yes') {
+    $correctAnswer = boolToStr($primeNumber);
+    if ($primeNumber === false && $userAnswer === 'no' || $primeNumber === true && $userAnswer === 'yes') {
         line("Correct!");
         return 1;
-    } elseif ($primeNum === false && $userAnswer !== 'no' || $primeNum === true && $userAnswer !== 'yes') {
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}. Let's try again, {$name}!");
+    } elseif ($primeNumber === false && $userAnswer !== 'no' || $primeNumber === true && $userAnswer !== 'yes') {
+        line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}. Let's try again, {$userName}!");
         die();
     }
     // else {
-    //     line("The answer can be only 'yes' or 'no'. Let's try again, {$name}!");
+    //     line("The answer can be only 'yes' or 'no'. Let's try again, {$userName}!");
     // }
 }
 
-// bool in expToString
+// bool in expressionToString
 function boolToStr($num)
 {
     if ($num === true) {
@@ -55,20 +55,20 @@ function runPrimeGame()
     $welcome = "Welcome to the Brain Games!\nAnswer 'yes' if given number is prime. Otherwise answer 'no'.\n";
 
     // ask name user
-    $name = run($welcome);
+    $userName = run($welcome);
 
     while (true) {
         // generate number
         $number = rand(2, 100);
 
         // is prime?
-        $primeNum = primeNum($number);
+        $primeNumber = primeNumber($number);
 
         //ask question
         $userAnswer = askQuestion($number);
 
         //is correct answer?
-        $compareAnswer = isCorrectAnswer($primeNum, $userAnswer, $name);
+        $compareAnswer = isCorrectAnswer($primeNumber, $userAnswer, $userName);
 
         if ($compareAnswer == 1) {
             $result++;
@@ -76,7 +76,7 @@ function runPrimeGame()
 
         // Congratulations
         if ($result == 3) {
-            myCongratz($name);
+            myCongratz($userName);
         }
     }
 }

@@ -9,51 +9,59 @@ use function cli\prompt;
 function run($welcome)
 {
     line($welcome);
-    $name = prompt('May I have your name', $default = false, "? ");
-    line("Hello, %s!", $name);
-    return $name;
+    $userName = prompt('May I have your name', $default = false, "? ");
+    line("Hello, %s!", $userName);
+    return $userName;
 }
 
 // Congratulations
-function myCongratz($name)
+function myCongratz($userName)
 {
-    line("Congratulations, %s!", $name);
+    line("Congratulations, %s!", $userName);
     die;
+}
+
+// welcom game
+function welcomGame()
+{
+    $welcome = "Welcome to the Brain Games!\n";
+
+    run($welcome);
 }
 
 // generate two random integer
 // return
 //     Array
 //     (
-//         [firstNum] => 25
-//         [secondNum] => 42
+//         [firstNumber] => 25
+//         [secondNumber] => 42
 //     )
-function genNumArr()
+function generateTwoRandomNumber()
 {
     $res = [];
-    $res['firstNum'] = rand(1, 50);
-    $res['secondNum'] = rand(1, 50);
+    $res['firstNumber'] = rand(1, 50);
+    $res['secondNumber'] = rand(1, 50);
     return $res;
 }
 
 // expression array to string
 //     Array
 //     (
-//         [firstNum] => 'firstNum'
+//         [firstNumber] => 'firstNumber'
 //         [sign] => 'sign'
-//         [secondNum] => 'secondNum'
+//         [secondNumber] => 'secondNumber'
 //     )
-//   return =>  "'firstNum''sign' 'secondNum'"
-function expToString($arr)
+//   return =>  "'firstNumber''sign' 'secondNumber'"
+function expressionToString($arr)
 {
-    return "{$arr['firstNum']} {$arr['sign']} {$arr['secondNum']}";
+    return "{$arr['firstNumber']} {$arr['sign']} {$arr['secondNumber']}";
 }
 
 // задаем вопрос пользователю
 function askQuestion($val)
 {
-    // $strExp = expToString($arr);
+    // $strExp = expressionToString($arr);
     line("Question: {$val}");
-    $answer = prompt("Your answer");
-    return $answer;
+    $userAnswer = prompt("Your answer");
+    return $userAnswer;
 }
