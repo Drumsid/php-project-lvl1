@@ -7,6 +7,9 @@ use function cli\prompt;
 use function BrainGames\General\run;
 use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
+use function BrainGames\General\printCorrect;
+use function BrainGames\General\printWrongAnswer;
+use function BrainGames\General\countResult;
 
 //is prime function
 function primeNumber($n)
@@ -19,22 +22,15 @@ function primeNumber($n)
     return true;
 }
 
-
-
 // compare answer
-function isCorrectAnswer($primeNumber, $userAnswer, $userName)
+function compareAnswer($userAnswer, $primeNumber, $userName)
 {
     $correctAnswer = boolToStr($primeNumber);
     if ($primeNumber === false && $userAnswer === 'no' || $primeNumber === true && $userAnswer === 'yes') {
-        line("Correct!");
-        return 1;
+        return printCorrect();
     } elseif ($primeNumber === false && $userAnswer !== 'no' || $primeNumber === true && $userAnswer !== 'yes') {
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}. Let's try again, {$userName}!");
-        die();
+        printWrongAnswer($userAnswer, $correctAnswer, $userName);
     }
-    // else {
-    //     line("The answer can be only 'yes' or 'no'. Let's try again, {$userName}!");
-    // }
 }
 
 // bool in expressionToString
@@ -50,7 +46,7 @@ function boolToStr($num)
 // run prime game
 function runPrimeGame()
 {
-    $result = "";
+    $result = 0;
 
     $welcome = "Welcome to the Brain Games!\nAnswer 'yes' if given number is prime. Otherwise answer 'no'.\n";
 
@@ -68,15 +64,12 @@ function runPrimeGame()
         $userAnswer = askQuestion($number);
 
         //is correct answer?
-        $compareAnswer = isCorrectAnswer($primeNumber, $userAnswer, $userName);
+        $compareAnswer = compareAnswer($userAnswer, $primeNumber, $userName);
 
-        if ($compareAnswer == 1) {
-            $result++;
-        }
+        // conunt result
+        $result += countResult($compareAnswer);
 
         // Congratulations
-        if ($result == 3) {
-            myCongratz($userName);
-        }
+        myCongratz($userName, $result);
     }
 }

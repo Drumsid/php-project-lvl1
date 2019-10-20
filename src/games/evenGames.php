@@ -7,6 +7,9 @@ use function cli\prompt;
 use function BrainGames\General\run;
 use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
+use function BrainGames\General\printCorrect;
+use function BrainGames\General\printWrongAnswer;
+use function BrainGames\General\countResult;
 
 // генерирует число и проверяет положительное оно или нет, вернет массив [num, bool]
 function generateNumber()
@@ -42,14 +45,12 @@ function getNumber($arr)
 
 
 // корректный ли ответ?
-function isCorrectAnswer($userAnswer, $evenOrNot, $userName)
+function compareAnswer($userAnswer, $evenOrNot, $userName)
 {
     if (($userAnswer === 'yes' && $evenOrNot === 'yes') || ($userAnswer === 'no' && $evenOrNot === 'no')) {
-        line("Correct!");
-        return 1;
+        return printCorrect();
     } else {
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$evenOrNot}. Let's try again, {$userName}!");
-        die;
+        printWrongAnswer($userAnswer, $evenOrNot, $userName);
     }
 }
 
@@ -80,17 +81,12 @@ function runEvenGame()
 
 
         // compare answer and num
-        $compareAnswer = isCorrectAnswer($userAnswer, $evenOrNot, $userName);
+        $compareAnswer = compareAnswer($userAnswer, $evenOrNot, $userName);
 
-        if ($compareAnswer == 1) {
-            $result++;
-        } elseif ($compareAnswer == 0) {
-            $result = 0;
-        }
+        // conunt result
+        $result += countResult($compareAnswer);
 
-      // Congratulations
-        if ($result == 3) {
-            myCongratz($userName);
-        }
+        // Congratulations
+        myCongratz($userName, $result);
     }
 }

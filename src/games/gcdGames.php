@@ -9,6 +9,9 @@ use function BrainGames\General\generateTwoRandomNumber;
 use function BrainGames\General\run;
 use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
+use function BrainGames\General\printCorrect;
+use function BrainGames\General\printWrongAnswer;
+use function BrainGames\General\countResult;
 
 // find fgcd
 function gcd($arr)
@@ -31,21 +34,19 @@ function addSpaseSign($arr)
 }
 
 // is correct answer?
-function isCorrectAnswer($userAnswer, $corectAnswer, $userName)
+function compareAnswer($userAnswer, $corectAnswer, $userName)
 {
     if ($userAnswer != $corectAnswer) {
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$corectAnswer}. Let's try again, {$userName}!");
-        die;
+        printWrongAnswer($userAnswer, $corectAnswer, $userName);
     } else {
-        line("Correct!");
-        return 1;
+        return printCorrect();
     }
 }
 
 //run gcd game
 function runGcdGame()
 {
-    $result = "";
+    $result = 0;
 
     $welcome = "Welcome to the Brain Games!\nFind the greatest common divisor of given numbers.\n";
 
@@ -69,15 +70,12 @@ function runGcdGame()
         $corectAnswer = gcd($twoRandomNumber);
 
         //is correct answer?
-        $compareAnswer = isCorrectAnswer($userAnswer, $corectAnswer, $userName);
+        $compareAnswer = compareAnswer($userAnswer, $corectAnswer, $userName);
 
-        if ($compareAnswer == 1) {
-            $result++;
-        }
+        // conunt result
+        $result += countResult($compareAnswer);
 
         // Congratulations
-        if ($result == 3) {
-            myCongratz($userName);
-        }
+        myCongratz($userName, $result);
     }
 }

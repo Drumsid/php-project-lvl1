@@ -14,12 +14,6 @@ function run($welcome)
     return $userName;
 }
 
-// Congratulations
-function myCongratz($userName)
-{
-    line("Congratulations, %s!", $userName);
-    die;
-}
 
 // welcom game
 function welcomGame()
@@ -64,4 +58,35 @@ function askQuestion($val)
     line("Question: {$val}");
     $userAnswer = prompt("Your answer");
     return $userAnswer;
+}
+
+//print Correct!
+function printCorrect()
+{
+    line("Correct!");
+    return 1;
+}
+
+//print wrong answer!
+function printWrongAnswer($userAnswer, $evenOrNot, $userName)
+{
+    line("{$userAnswer} is wrong answer ;(. Correct answer was {$evenOrNot}. Let's try again, {$userName}!");
+    die;
+}
+
+//count result
+function countResult($compareAnswer)
+{
+    if ($compareAnswer == 1) {
+        return 1;
+    }
+}
+
+// Congratulations
+function myCongratz($userName, $result)
+{
+    if ($result == 3) {
+        line("Congratulations, %s!", $userName);
+        die;
+    }
 }

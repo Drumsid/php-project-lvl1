@@ -9,6 +9,9 @@ use function BrainGames\General\generateTwoRandomNumber;
 use function BrainGames\General\run;
 use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
+use function BrainGames\General\printCorrect;
+use function BrainGames\General\printWrongAnswer;
+use function BrainGames\General\countResult;
 
 // random znak
 function randomSign()
@@ -48,25 +51,19 @@ function countExpression($arr)
 
 
 // корректный ли ответ?
-function isCorrectAnswer($userAnswer, $expressionResult, $userName)
+function compareAnswer($userAnswer, $expressionResult, $userName)
 {
-    // $expressionResult = countExpression($exp);
-    // $expStr = expressionToString($exp);
     if ($userAnswer != $expressionResult) {
-        // line("Question: {$expStr}");      // возможно не правильно понял тз, поэтому сделал такой вывод в консоль
-        // line("Your answer: {$userAnswer}");   // возможно не правильно понял тз, поэтому сделал такой вывод в консоль
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$expressionResult}. Let's try again, {$userName}!");
-        die;
+        printWrongAnswer($userAnswer, $expressionResult, $userName);
     } else {
-        line("Correct!");
-        return 1;
+        return printCorrect();
     }
 }
 
 // run calc game
 function runCalcGame()
 {
-    $result = "";
+    $result = 0;
 
     $welcome = "Welcome to the Brain Games!\nWhat is the result of the expression?\n";
 
@@ -90,15 +87,12 @@ function runCalcGame()
         $expressionResult = countExpression($expression);
 
         // compare answer
-        $corectAnswer = isCorrectAnswer($userAnswer, $expressionResult, $userName);
+        $compareAnswer = compareAnswer($userAnswer, $expressionResult, $userName);
 
-        if ($corectAnswer == 1) {
-            $result++;
-        }
+        // conunt result
+        $result += countResult($compareAnswer);
 
         // Congratulations
-        if ($result == 3) {
-            myCongratz($userName);
-        }
+        myCongratz($userName, $result);
     }
 }

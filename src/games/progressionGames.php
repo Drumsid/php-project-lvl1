@@ -7,6 +7,9 @@ use function cli\prompt;
 use function BrainGames\General\run;
 use function BrainGames\General\askQuestion;
 use function BrainGames\General\myCongratz;
+use function BrainGames\General\printCorrect;
+use function BrainGames\General\printWrongAnswer;
+use function BrainGames\General\countResult;
 
 function randomStep()
 {
@@ -63,21 +66,19 @@ function getCorrectAnswer($arr)
 
 
 // compare answer
-function isCorrectAnswer($correctAnswer, $userAnswer, $userName)
+function compareAnswer($userAnswer, $correctAnswer, $userName)
 {
     if ($userAnswer != $correctAnswer) {
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}. Let's try again, {$userName}!");
-        die;
+        printWrongAnswer($userAnswer, $correctAnswer, $userName);
     } else {
-        line("Correct!");
-        return 1;
+        return printCorrect();
     }
 }
 
 // run progression game
 function runProgressionGame()
 {
-    $result = "";
+    $result = 0;
 
     $welcome = "Welcome to the Brain Games!\nWhat number is missing in the progression?\n";
 
@@ -98,15 +99,12 @@ function runProgressionGame()
         $correctAnswer = getCorrectAnswer($progression);
 
         //is correct answer?
-        $compareAnswer = isCorrectAnswer($correctAnswer, $userAnswer, $userName);
+        $compareAnswer = compareAnswer($userAnswer, $correctAnswer, $userName);
 
-        if ($compareAnswer == 1) {
-            $result++;
-        }
+        // conunt result
+        $result += countResult($compareAnswer);
 
-      // Congratulations
-        if ($result == 3) {
-            myCongratz($userName);
-        }
+        // Congratulations
+        myCongratz($userName, $result);
     }
 }
