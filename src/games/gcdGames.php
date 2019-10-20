@@ -48,10 +48,8 @@ function runGcdGame()
 {
     $result = 0;
 
-    $welcome = "Welcome to the Brain Games!\nFind the greatest common divisor of given numbers.\n";
-
     // ask name user
-    $userName = run($welcome);
+    $userName = run("Find the greatest common divisor of given numbers.\n");
 
     while (true) {
         //generate Num array

@@ -48,10 +48,8 @@ function runPrimeGame()
 {
     $result = 0;
 
-    $welcome = "Welcome to the Brain Games!\nAnswer 'yes' if given number is prime. Otherwise answer 'no'.\n";
-
     // ask name user
-    $userName = run($welcome);
+    $userName = run("Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
 
     while (true) {
         // generate number

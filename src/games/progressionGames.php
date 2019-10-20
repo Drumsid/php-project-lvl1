@@ -80,10 +80,8 @@ function runProgressionGame()
 {
     $result = 0;
 
-    $welcome = "Welcome to the Brain Games!\nWhat number is missing in the progression?\n";
-
     // ask name user
-    $userName = run($welcome);
+    $userName = run("What number is missing in the progression?\n");
 
     while (true) {
         // generate progression and correct answer

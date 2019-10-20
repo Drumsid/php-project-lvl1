@@ -59,11 +59,8 @@ function runEvenGame()
 {
     $result = 0;
 
-    $welcome = "Welcome to the Brain Games!\nAnswer 'yes' if the number is even, otherwise answer 'no'.\n";
-
-
     // ask name user
-    $userName = run($welcome);
+    $userName = run("Answer 'yes' if the number is even, otherwise answer 'no'.\n");
 
     // start the game
     while (true) {

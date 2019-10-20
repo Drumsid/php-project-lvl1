@@ -65,10 +65,8 @@ function runCalcGame()
 {
     $result = 0;
 
-    $welcome = "Welcome to the Brain Games!\nWhat is the result of the expression?\n";
-
     // ask name user
-    $userName = run($welcome);
+    $userName = run("What is the result of the expression?\n");
 
     while (true) {
         //generate two Numbers in array
