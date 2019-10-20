@@ -28,7 +28,7 @@ function compareAnswer($userAnswer, $primeNumber, $userName)
     $correctAnswer = boolToStr($primeNumber);
     if ($primeNumber === false && $userAnswer === 'no' || $primeNumber === true && $userAnswer === 'yes') {
         return printCorrect();
-    } elseif ($primeNumber === false && $userAnswer !== 'no' || $primeNumber === true && $userAnswer !== 'yes') {
+    } else {
         printWrongAnswer($userAnswer, $correctAnswer, $userName);
     }
 }
