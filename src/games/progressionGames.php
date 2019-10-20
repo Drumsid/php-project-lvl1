@@ -11,34 +11,33 @@ use function BrainGames\General\printCorrect;
 use function BrainGames\General\printWrongAnswer;
 use function BrainGames\General\countResult;
 
-function randomStep()
+//generate array of random progression numbers
+function generateRandomProgression()
 {
-    return rand(2, 5);
-}
-
-// genirate progression
-function generateProgression()
-{
-    $generateProgression = [];
-
-    $randomCountStep = randomStep();
-
-    $randomStartNumber = rand(1, 10);
-
-    $randomHideKey = rand(1, 8);
-
     $result = [];
 
-    for ($i = 0, $step = $randomStartNumber; $i < 10; $i++) {
+    $generateCountStep = rand(2, 5);
+
+    $generateStartNumber = rand(1, 10);
+
+    for ($i = 0, $step = $generateStartNumber; $i < 10; $i++) {
         if ($i == 0) {
-            $generateProgression[] = $step;
+            $result[] = $step;
         } else {
-            $step += $randomCountStep;
-            $generateProgression[] = $step;
+            $step += $generateCountStep;
+            $result[] = $step;
         }
     }
+    return $result;
+}
 
+// hide random number in array of random progression numbers
+function generateRandomHideNumber($generateProgression)
+{
+    $result = [];
     $generateRandomHideNumber = [];
+    $randomHideKey = rand(1, 8);
+
     foreach ($generateProgression as $k => $v) {
         if ($k == $randomHideKey) {
             $generateRandomHideNumber[] = "..";
@@ -49,8 +48,19 @@ function generateProgression()
 
     $result['progression'] = implode(" ", $generateRandomHideNumber);
     $result['correctAnswer'] = $generateProgression[$randomHideKey];
+
     return $result;
 }
+
+// genirate progression
+function progressionWithRandomHidenNumber()
+{
+    $generateRandomProgression = generateRandomProgression();
+
+    return generateRandomHideNumber($generateRandomProgression);
+}
+
+
 
 // get progression str from array
 function getProgression($arr)
@@ -85,7 +95,7 @@ function runProgressionGame()
 
     while (true) {
         // generate progression and correct answer
-        $progression = generateProgression();
+        $progression = progressionWithRandomHidenNumber();
 
         // get progression str from array
         $expressionProgression = getProgression($progression);
