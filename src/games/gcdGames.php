@@ -32,12 +32,12 @@ function addSpaseSign($arr)
 // generate gcd expression
 function generateGcdExpression()
 {
-    $arrExpression = generateTwoRandomNumber();
-    return addSpaseSign($arrExpression);
+    $twoRandomNumbers = generateTwoRandomNumber();
+    return addSpaseSign($twoRandomNumbers);
 }
 
 //generate array of three array gcd expression
-function generateArrayOfThreeGcdExpression()
+function generateThreeGcdExpressions()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
@@ -47,21 +47,21 @@ function generateArrayOfThreeGcdExpression()
 }
 
 // array of gcd expression
-function arrayOfGcdExpression($generateGcdExpression)
+function threeGcdExpressionsToString($generateGcdExpressions)
 {
     $result = [];
-    foreach ($generateGcdExpression as $array) {
-        $result[] = expressionToString($array);
+    foreach ($generateGcdExpressions as $gcdExpression) {
+        $result[] = expressionToString($gcdExpression);
     }
     return $result;
 }
 
 // array  of correct gcd answer
-function arrayOfCorrectGcdAnswer($generateGcdExpression)
+function correctGcdAnswers($generateGcdExpressions)
 {
     $result = [];
-    foreach ($generateGcdExpression as $array) {
-        $result[] = findGcd($array);
+    foreach ($generateGcdExpressions as $gcdExpression) {
+        $result[] = findGcd($gcdExpression);
     }
     return $result;
 }
@@ -69,12 +69,12 @@ function arrayOfCorrectGcdAnswer($generateGcdExpression)
 
 function runGcdGame()
 {
-    $generateGcdExpression = generateArrayOfThreeGcdExpression();
+    $generateThreeGcdExpressions = generateThreeGcdExpressions();
 
-    $arrayGcdExpression = arrayOfGcdExpression($generateGcdExpression);
-    $arrayGcdCorrect = arrayOfCorrectGcdAnswer($generateGcdExpression);
+    $gcdExpressions = threeGcdExpressionsToString($generateThreeGcdExpressions);
+    $correctGcdAnswers = correctGcdAnswers($generateThreeGcdExpressions);
 
-    $arrayCombine = array_combine($arrayGcdExpression, $arrayGcdCorrect);
+    $combineGcdExpressionsAndCorrectAnswers = array_combine($gcdExpressions, $correctGcdAnswers);
 
-    runEngine($arrayCombine, "Find the greatest common divisor of given numbers.\n");
+    runEngine($combineGcdExpressionsAndCorrectAnswers, "Find the greatest common divisor of given numbers.\n");
 }
