@@ -6,12 +6,8 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\General\expressionToString;
 use function BrainGames\General\generateTwoRandomNumber;
-use function BrainGames\General\run;
-use function BrainGames\General\askQuestion;
-use function BrainGames\General\myCongratz;
-use function BrainGames\General\printCorrect;
-use function BrainGames\General\printWrongAnswer;
-use function BrainGames\General\countResult;
+use function BrainGames\General\welcomToGame;
+use function BrainGames\General\runEngine;
 
 // random znak
 function randomSign()
@@ -48,49 +44,53 @@ function countExpression($arr)
     }
 }
 
-
-
-// корректный ли ответ?
-function compareAnswer($userAnswer, $expressionResult, $userName)
+// generate expression
+function generateExpression()
 {
-    if ($userAnswer != $expressionResult) {
-        printWrongAnswer($userAnswer, $expressionResult, $userName);
-    } else {
-        return printCorrect();
+  $arrExp = generateTwoRandomNumber();
+  return addRandomSignToExpression($arrExp);
+}
+
+//generate array of three array numbers
+function generateArrayOfThreeExpression()
+{
+    $result = [];
+    for ($i = 0; $i < 3; $i++) {
+        $result[] = generateExpression();
     }
+    return $result;
+}
+
+// array string expression
+function arrayOfStringExpression($arrayExpression)
+{
+  $result = [];
+  foreach ($arrayExpression as $array) {
+    $result[] = expressionToString($array);
+  }
+  return $result;
+}
+
+// array correct answer
+function arrayOfCorrectAnswer($arrayExpression)
+{
+  $result = [];
+  foreach ($arrayExpression as $array) {
+    $result[] = countExpression($array);
+  }
+  return $result;
 }
 
 // run calc game
 function runCalcGame()
 {
-    $result = 0;
+    $generateArrayOfThreeNumbers = generateArrayOfThreeExpression();
 
-    // ask name user
-    $userName = run("What is the result of the expression?\n");
+    $arrayExpression = arrayOfStringExpression($generateArrayOfThreeNumbers);
+    $arrayCorrect = arrayOfCorrectAnswer($generateArrayOfThreeNumbers);
 
-    while (true) {
-        //generate two Numbers in array
-        $twoRandomNumber = generateTwoRandomNumber();
+    $arrayCombine = array_combine($arrayExpression, $arrayCorrect);
 
-        // add sign to array exp
-        $expression = addRandomSignToExpression($twoRandomNumber);
-
-        //expression to string
-        $expressionToString = expressionToString($expression);
-
-        // ask question
-        $userAnswer = askQuestion($expressionToString);
-
-        // count result expression
-        $expressionResult = countExpression($expression);
-
-        // compare answer
-        $compareAnswer = compareAnswer($userAnswer, $expressionResult, $userName);
-
-        // conunt result
-        $result += countResult($compareAnswer);
-
-        // Congratulations
-        myCongratz($userName, $result);
-    }
+    runEngine($arrayCombine, "What is the result of the expression?\n");
 }
+

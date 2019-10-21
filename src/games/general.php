@@ -6,7 +6,7 @@ use function cli\line;
 use function cli\prompt;
 
 // Welcome
-function run($welcome)
+function welcomToGame($welcome)
 {
     line("Welcome to the Brain Games!\n{$welcome}\n");
     $userName = prompt('May I have your name', $default = false, "? ");
@@ -14,14 +14,25 @@ function run($welcome)
     return $userName;
 }
 
-
-// welcom game
-function welcomGame()
-{
-    $welcome = "Welcome to the Brain Games!\n";
-
-    run($welcome);
+//run engine The game
+function runEngine($arrayCombine, $welcome)
+{     
+     $userName = welcomToGame($welcome); 
+     //run questions
+    foreach ($arrayCombine as $key => $vol) {
+      line("Question: {$key}");
+      $userAnswer = prompt("Your answer");
+      if ($userAnswer == $vol) {
+        line("Correct!");
+      } else {
+        line("{$userAnswer} is wrong answer ;(. Correct answer was {$vol}. Let's try again, {$userName}!");
+        die();
+      }
+    } 
+    line("Congratulations, %s!", $userName);
 }
+
+// ================================================================================
 
 // generate two random integer
 // return
@@ -51,42 +62,5 @@ function expressionToString($arr)
     return "{$arr['firstNumber']} {$arr['sign']} {$arr['secondNumber']}";
 }
 
-// задаем вопрос пользователю
-function askQuestion($val)
-{
-    // $strExp = expressionToString($arr);
-    line("Question: {$val}");
-    $userAnswer = prompt("Your answer");
-    return $userAnswer;
-}
 
-//print Correct!
-function printCorrect()
-{
-    line("Correct!");
-    return 1;
-}
 
-//print wrong answer!
-function printWrongAnswer($userAnswer, $evenOrNot, $userName)
-{
-    line("{$userAnswer} is wrong answer ;(. Correct answer was {$evenOrNot}. Let's try again, {$userName}!");
-    die;
-}
-
-//count result
-function countResult($compareAnswer)
-{
-    if ($compareAnswer == 1) {
-        return 1;
-    }
-}
-
-// Congratulations
-function myCongratz($userName, $result)
-{
-    if ($result == 3) {
-        line("Congratulations, %s!", $userName);
-        die;
-    }
-}
