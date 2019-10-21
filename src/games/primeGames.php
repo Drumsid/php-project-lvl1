@@ -4,70 +4,48 @@ namespace BrainGames\primeGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\run;
-use function BrainGames\General\askQuestion;
-use function BrainGames\General\myCongratz;
-use function BrainGames\General\printCorrect;
-use function BrainGames\General\printWrongAnswer;
-use function BrainGames\General\countResult;
+use function BrainGames\General\welcomToGame;
+use function BrainGames\General\runEngine;
 
 //is prime function
 function primeNumber($n)
 {
     for ($x = 2; $x <= sqrt($n); $x++) {
         if ($n % $x == 0) {
-            return false;
+            return 'no';
         }
     }
-    return true;
+    return 'yes';
 }
 
-// compare answer
-function compareAnswer($userAnswer, $primeNumber, $userName)
+//generate three numbers
+function generateThreeRandomNumbers()
 {
-    $correctAnswer = boolToStr($primeNumber);
-    if ($primeNumber === false && $userAnswer === 'no' || $primeNumber === true && $userAnswer === 'yes') {
-        return printCorrect();
-    } else {
-        printWrongAnswer($userAnswer, $correctAnswer, $userName);
+    $result = [];
+    for ($i = 0; $i < 3; $i++) {
+        $result[] = rand(2, 100);
     }
+    return $result;
 }
 
-// bool in expressionToString
-function boolToStr($num)
+//generate correct answer prime
+function arrayOfCorrectPrimeAnswer($generateThreeRandomNumbers)
 {
-    if ($num === true) {
-        return "yes";
-    } else {
-        return "no";
-    }
+  $result = [];
+  foreach ($generateThreeRandomNumbers as $array) {
+    $result[] = primeNumber($array);
+  }
+  return $result;
 }
 
 // run prime game
 function runPrimeGame()
 {
-    $result = 0;
+    $generateThreeRandomNumbers = generateThreeRandomNumbers();   
+    
+    $arrayOfCorrectPrimeAnswer = arrayOfCorrectPrimeAnswer($generateThreeRandomNumbers);
 
-    // ask name user
-    $userName = run("Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
+    $arrayCombine = array_combine($generateThreeRandomNumbers, $arrayOfCorrectPrimeAnswer);
 
-    while (true) {
-        // generate number
-        $number = rand(2, 100);
-
-        // is prime?
-        $primeNumber = primeNumber($number);
-
-        //ask question
-        $userAnswer = askQuestion($number);
-
-        //is correct answer?
-        $compareAnswer = compareAnswer($userAnswer, $primeNumber, $userName);
-
-        // conunt result
-        $result += countResult($compareAnswer);
-
-        // Congratulations
-        myCongratz($userName, $result);
-    }
+    runEngine($arrayCombine, "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
 }
