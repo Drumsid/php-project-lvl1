@@ -52,62 +52,6 @@ function sortByKey($ArrayOfThreeNumbers, $keySearchArray)
   return $result;
 }
 
-// // get even or not
-// function getEven($arr)
-// {
-//     return $arr['even'];
-// }
-
-// // get even or not
-// function getNumber($arr)
-// {
-//     return $arr['number'];
-// }
-
-
-// // корректный ли ответ?
-// function compareAnswer($userAnswer, $evenOrNot, $userName)
-// {
-//     if (($userAnswer === 'yes' && $evenOrNot === 'yes') || ($userAnswer === 'no' && $evenOrNot === 'no')) {
-//         return printCorrect();
-//     } else {
-//         printWrongAnswer($userAnswer, $evenOrNot, $userName);
-//     }
-// }
-
-// run the even game
-// function runEvenGame()
-// {
-//     $result = 0;
-
-//     // ask name user
-//     $userName = run("Answer 'yes' if the number is even, otherwise answer 'no'.\n");
-
-//     // start the game
-//     while (true) {
-//         // generate number
-//         $randomEvenNumber = generateNumber();
-
-//         // get number from arrNumEven
-//         $number = getNumber($randomEvenNumber);
-
-//         // get even or not
-//         $evenOrNot = getEven($randomEvenNumber);
-
-//         // ask question isEven number?
-//         $userAnswer = askQuestion($number);
-
-
-//         // compare answer and num
-//         $compareAnswer = compareAnswer($userAnswer, $evenOrNot, $userName);
-
-//         // conunt result
-//         $result += countResult($compareAnswer);
-
-//         // Congratulations
-//         myCongratz($userName, $result);
-//     }
-// }
 
 function runEvenGame()
 {

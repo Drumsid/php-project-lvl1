@@ -4,12 +4,9 @@ namespace BrainGames\progressionGame;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\run;
-use function BrainGames\General\askQuestion;
-use function BrainGames\General\myCongratz;
-use function BrainGames\General\printCorrect;
-use function BrainGames\General\printWrongAnswer;
-use function BrainGames\General\countResult;
+use function BrainGames\General\welcomToGame;
+use function BrainGames\General\runEngine;
+use function BrainGames\evenGames\sortByKey;
 
 //generate array of random progression numbers
 function generateRandomProgression()
@@ -60,59 +57,26 @@ function progressionWithRandomHidenNumber()
     return generateRandomHideNumber($generateRandomProgression);
 }
 
-
-
-// get progression str from array
-function getProgression($arr)
+//generate random progression array
+function generateArrayOfProgression()
 {
-    return $arr['progression'];
-}
-
-// get correct answer from array
-function getCorrectAnswer($arr)
-{
-    return $arr['correctAnswer'];
-}
-
-
-// compare answer
-function compareAnswer($userAnswer, $correctAnswer, $userName)
-{
-    if ($userAnswer != $correctAnswer) {
-        printWrongAnswer($userAnswer, $correctAnswer, $userName);
-    } else {
-        return printCorrect();
+    $result = [];
+    for ($i = 0; $i < 3; $i++) {
+        $result[] = progressionWithRandomHidenNumber();
     }
+    return $result;
 }
 
-// run progression game
+
 function runProgressionGame()
 {
-    $result = 0;
+    $generateArrayOfProgression = generateArrayOfProgression();
 
-    // ask name user
-    $userName = run("What number is missing in the progression?\n");
+    $arrayProgression = sortByKey($generateArrayOfProgression, 'progression');
+    $arrayCorrectAnswer = sortByKey($generateArrayOfProgression, 'correctAnswer');
 
-    while (true) {
-        // generate progression and correct answer
-        $progression = progressionWithRandomHidenNumber();
+    $arrayCombine = array_combine($arrayProgression, $arrayCorrectAnswer);
 
-        // get progression str from array
-        $expressionProgression = getProgression($progression);
-
-        //ask question
-        $userAnswer = askQuestion($expressionProgression);
-
-        //get correct answer
-        $correctAnswer = getCorrectAnswer($progression);
-
-        //is correct answer?
-        $compareAnswer = compareAnswer($userAnswer, $correctAnswer, $userName);
-
-        // conunt result
-        $result += countResult($compareAnswer);
-
-        // Congratulations
-        myCongratz($userName, $result);
-    }
+    runEngine($arrayCombine, "What number is missing in the progression?\n");
 }
+
