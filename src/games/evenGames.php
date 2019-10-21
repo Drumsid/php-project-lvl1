@@ -29,7 +29,7 @@ function isEven($number)
 }
 
 //generate array of three array nambers
-function generateArrayOfThreeNumbers()
+function generateThreeNumbers()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
@@ -39,12 +39,12 @@ function generateArrayOfThreeNumbers()
 }
 
 // sort array by key
-function sortByKey($ArrayOfThreeNumbers, $keySearchArray)
+function sortByKey($threeNumbers, $keySearch)
 {
     $result = [];
-    foreach ($ArrayOfThreeNumbers as $array) {
-        foreach ($array as $key => $vol) {
-            if ($key == $keySearchArray) {
+    foreach ($threeNumbers as $number) {
+        foreach ($number as $key => $vol) {
+            if ($key == $keySearch) {
                 $result[] = $vol;
             }
         }
@@ -56,12 +56,12 @@ function sortByKey($ArrayOfThreeNumbers, $keySearchArray)
 function runEvenGame()
 {
     //generate array of three array numbers
-    $arrayOfTreeNumbers = generateArrayOfThreeNumbers();
+    $threeNumbers = generateThreeNumbers();
 
-    $arrayNumber = sortByKey($arrayOfTreeNumbers, 'number');
-    $arrayEven = sortByKey($arrayOfTreeNumbers, 'even');
+    $numbers = sortByKey($threeNumbers, 'number');
+    $evens = sortByKey($threeNumbers, 'even');
 
-    $arrayCombine = array_combine($arrayNumber, $arrayEven);
+    $combineNumbersAndCorrectAnswers = array_combine($numbers, $evens);
 
-    runEngine($arrayCombine, "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
+    runEngine($combineNumbersAndCorrectAnswers, "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
 }

@@ -52,7 +52,7 @@ function generateExpression()
 }
 
 //generate array of three array numbers
-function generateThreeExpression()
+function generateThreeExpressions()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
@@ -84,7 +84,7 @@ function correctAnswers($threeExpressions)
 // run calc game
 function runCalcGame()
 {
-    $generateThreeExpressions = generateThreeExpression();
+    $generateThreeExpressions = generateThreeExpressions();
 
     $threeExpressions = stringExpressions($generateThreeExpressions);
     $correctAnswers = correctAnswers($generateThreeExpressions);
