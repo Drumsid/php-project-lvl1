@@ -6,15 +6,11 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\General\expressionToString;
 use function BrainGames\General\generateTwoRandomNumber;
-use function BrainGames\General\run;
-use function BrainGames\General\askQuestion;
-use function BrainGames\General\myCongratz;
-use function BrainGames\General\printCorrect;
-use function BrainGames\General\printWrongAnswer;
-use function BrainGames\General\countResult;
+use function BrainGames\General\welcomToGame;
+use function BrainGames\General\runEngine;
 
-// find fgcd
-function gcd($arr)
+// find gcd
+function findGcd($arr)
 {
     while ($arr['firstNumber'] != $arr['secondNumber']) {
         if ($arr['firstNumber'] > $arr['secondNumber']) {
@@ -33,47 +29,52 @@ function addSpaseSign($arr)
     return $arr;
 }
 
-// is correct answer?
-function compareAnswer($userAnswer, $corectAnswer, $userName)
+// generate gcd expression
+function generateGcdExpression()
 {
-    if ($userAnswer != $corectAnswer) {
-        printWrongAnswer($userAnswer, $corectAnswer, $userName);
-    } else {
-        return printCorrect();
-    }
+  $arrExpression = generateTwoRandomNumber();
+  return addSpaseSign($arrExpression);
 }
 
-//run gcd game
+//generate array of three array gcd expression
+function generateArrayOfThreeGcdExpression()
+{
+    $result = [];
+    for ($i = 0; $i < 3; $i++) {
+        $result[] = generateGcdExpression();
+    }
+    return $result;
+}
+
+// array of gcd expression
+function arrayOfGcdExpression($generateGcdExpression)
+{
+  $result = [];
+  foreach ($generateGcdExpression as $array) {
+    $result[] = expressionToString($array);
+  }
+  return $result;
+}
+
+// array  of correct gcd answer
+function arrayOfCorrectGcdAnswer($generateGcdExpression)
+{
+  $result = [];
+  foreach ($generateGcdExpression as $array) {
+    $result[] = findGcd($array);
+  }
+  return $result;
+}
+
+
 function runGcdGame()
 {
-    $result = 0;
+    $generateGcdExpression = generateArrayOfThreeGcdExpression();
 
-    // ask name user
-    $userName = run("Find the greatest common divisor of given numbers.\n");
+    $arrayGcdExpression = arrayOfGcdExpression($generateGcdExpression);
+    $arrayGcdCorrect = arrayOfCorrectGcdAnswer($generateGcdExpression);
 
-    while (true) {
-        //generate Num array
-        $twoRandomNumber = generateTwoRandomNumber();
+    $arrayCombine = array_combine($arrayGcdExpression, $arrayGcdCorrect);
 
-        // add space
-        $expression = addSpaseSign($twoRandomNumber);
-
-        //exp to string
-        $expressionToString = expressionToString($expression);
-
-        // ask question
-        $userAnswer = askQuestion($expressionToString);
-
-        //is correct answer
-        $corectAnswer = gcd($twoRandomNumber);
-
-        //is correct answer?
-        $compareAnswer = compareAnswer($userAnswer, $corectAnswer, $userName);
-
-        // conunt result
-        $result += countResult($compareAnswer);
-
-        // Congratulations
-        myCongratz($userName, $result);
-    }
+    runEngine($arrayCombine, "Find the greatest common divisor of given numbers.\n");    
 }
