@@ -38,18 +38,18 @@ function generateArrayOfThreeNumbers()
     return $result;
 }
 
-// sort array by key 
+// sort array by key
 function sortByKey($ArrayOfThreeNumbers, $keySearchArray)
-{ 
-  $result = [];
-  foreach ($ArrayOfThreeNumbers as $array) {
-    foreach ($array as $key => $vol) {
-      if ($key == $keySearchArray){
-        $result[] = $vol;
-      }
+{
+    $result = [];
+    foreach ($ArrayOfThreeNumbers as $array) {
+        foreach ($array as $key => $vol) {
+            if ($key == $keySearchArray) {
+                $result[] = $vol;
+            }
+        }
     }
-  }
-  return $result;
+    return $result;
 }
 
 
@@ -64,8 +64,4 @@ function runEvenGame()
     $arrayCombine = array_combine($arrayNumber, $arrayEven);
 
     runEngine($arrayCombine, "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
-
 }
-
-
-

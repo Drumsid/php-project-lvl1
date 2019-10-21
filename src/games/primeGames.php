@@ -31,18 +31,18 @@ function generateThreeRandomNumbers()
 //generate correct answer prime
 function arrayOfCorrectPrimeAnswer($generateThreeRandomNumbers)
 {
-  $result = [];
-  foreach ($generateThreeRandomNumbers as $array) {
-    $result[] = primeNumber($array);
-  }
-  return $result;
+    $result = [];
+    foreach ($generateThreeRandomNumbers as $array) {
+        $result[] = primeNumber($array);
+    }
+    return $result;
 }
 
 // run prime game
 function runPrimeGame()
 {
-    $generateThreeRandomNumbers = generateThreeRandomNumbers();   
-    
+    $generateThreeRandomNumbers = generateThreeRandomNumbers();
+
     $arrayOfCorrectPrimeAnswer = arrayOfCorrectPrimeAnswer($generateThreeRandomNumbers);
 
     $arrayCombine = array_combine($generateThreeRandomNumbers, $arrayOfCorrectPrimeAnswer);

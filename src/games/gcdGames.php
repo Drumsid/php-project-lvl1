@@ -32,8 +32,8 @@ function addSpaseSign($arr)
 // generate gcd expression
 function generateGcdExpression()
 {
-  $arrExpression = generateTwoRandomNumber();
-  return addSpaseSign($arrExpression);
+    $arrExpression = generateTwoRandomNumber();
+    return addSpaseSign($arrExpression);
 }
 
 //generate array of three array gcd expression
@@ -49,21 +49,21 @@ function generateArrayOfThreeGcdExpression()
 // array of gcd expression
 function arrayOfGcdExpression($generateGcdExpression)
 {
-  $result = [];
-  foreach ($generateGcdExpression as $array) {
-    $result[] = expressionToString($array);
-  }
-  return $result;
+    $result = [];
+    foreach ($generateGcdExpression as $array) {
+        $result[] = expressionToString($array);
+    }
+    return $result;
 }
 
 // array  of correct gcd answer
 function arrayOfCorrectGcdAnswer($generateGcdExpression)
 {
-  $result = [];
-  foreach ($generateGcdExpression as $array) {
-    $result[] = findGcd($array);
-  }
-  return $result;
+    $result = [];
+    foreach ($generateGcdExpression as $array) {
+        $result[] = findGcd($array);
+    }
+    return $result;
 }
 
 
@@ -76,5 +76,5 @@ function runGcdGame()
 
     $arrayCombine = array_combine($arrayGcdExpression, $arrayGcdCorrect);
 
-    runEngine($arrayCombine, "Find the greatest common divisor of given numbers.\n");    
+    runEngine($arrayCombine, "Find the greatest common divisor of given numbers.\n");
 }

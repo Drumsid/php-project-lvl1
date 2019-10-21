@@ -79,4 +79,3 @@ function runProgressionGame()
 
     runEngine($arrayCombine, "What number is missing in the progression?\n");
 }
-

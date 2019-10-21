@@ -16,19 +16,19 @@ function welcomToGame($welcome)
 
 //run engine The game
 function runEngine($arrayCombine, $welcome)
-{     
-     $userName = welcomToGame($welcome); 
+{
+     $userName = welcomToGame($welcome);
      //run questions
-    foreach ($arrayCombine as $key => $vol) {
-      line("Question: {$key}");
-      $userAnswer = prompt("Your answer");
-      if ($userAnswer == $vol) {
-        line("Correct!");
-      } else {
-        line("{$userAnswer} is wrong answer ;(. Correct answer was {$vol}. Let's try again, {$userName}!");
-        die();
-      }
-    } 
+    foreach ($arrayCombine as $question => $correctAnswer) {
+        line("Question: {$question}");
+        $userAnswer = prompt("Your answer");
+        if ($userAnswer == $correctAnswer) {
+            line("Correct!");
+        } else {
+            line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}.Let's try again, {$userName}!");
+            die();
+        }
+    }
     line("Congratulations, %s!", $userName);
 }
 
@@ -61,6 +61,3 @@ function expressionToString($arr)
 {
     return "{$arr['firstNumber']} {$arr['sign']} {$arr['secondNumber']}";
 }
-
-
-
