@@ -8,10 +8,10 @@ use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
 
 //is prime function
-function primeNumber($n)
+function isPrimeNumber($number)
 {
-    for ($x = 2; $x <= sqrt($n); $x++) {
-        if ($n % $x == 0) {
+    for ($x = 2; $x <= sqrt($number); $x++) {
+        if ($number % $x == 0) {
             return 'no';
         }
     }
@@ -29,11 +29,11 @@ function generateThreeRandomNumbers()
 }
 
 //generate correct answer prime
-function arrayOfCorrectPrimeAnswer($generateThreeRandomNumbers)
+function correctPrimeAnswers($generateThreeRandomNumbers)
 {
     $result = [];
-    foreach ($generateThreeRandomNumbers as $array) {
-        $result[] = primeNumber($array);
+    foreach ($generateThreeRandomNumbers as $number) {
+        $result[] = isPrimeNumber($number);
     }
     return $result;
 }
@@ -43,9 +43,9 @@ function runPrimeGame()
 {
     $generateThreeRandomNumbers = generateThreeRandomNumbers();
 
-    $arrayOfCorrectPrimeAnswer = arrayOfCorrectPrimeAnswer($generateThreeRandomNumbers);
+    $correctPrimeAnswers = correctPrimeAnswers($generateThreeRandomNumbers);
 
-    $arrayCombine = array_combine($generateThreeRandomNumbers, $arrayOfCorrectPrimeAnswer);
+    $combinePrimeNumbersAndCorrectAnswers = array_combine($generateThreeRandomNumbers, $correctPrimeAnswers);
 
-    runEngine($arrayCombine, "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
+    runEngine($combinePrimeNumbersAndCorrectAnswers, "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
 }
