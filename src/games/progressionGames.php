@@ -58,7 +58,7 @@ function progressionWithRandomHidenNumber()
 }
 
 //generate random progression array
-function generateArrayOfProgression()
+function generateThreeProgressions()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
@@ -70,12 +70,12 @@ function generateArrayOfProgression()
 
 function runProgressionGame()
 {
-    $generateArrayOfProgression = generateArrayOfProgression();
+    $generateThreeProgressions = generateThreeProgressions();
 
-    $arrayProgression = sortByKey($generateArrayOfProgression, 'progression');
-    $arrayCorrectAnswer = sortByKey($generateArrayOfProgression, 'correctAnswer');
+    $progressions = sortByKey($generateThreeProgressions, 'progression');
+    $correctAnswers = sortByKey($generateThreeProgressions, 'correctAnswer');
 
-    $arrayCombine = array_combine($arrayProgression, $arrayCorrectAnswer);
+    $combineProgressionsAndCorrectAnswers = array_combine($progressions, $correctAnswers);
 
-    runEngine($arrayCombine, "What number is missing in the progression?\n");
+    runEngine($combineProgressionsAndCorrectAnswers, "What number is missing in the progression?\n");
 }
