@@ -6,7 +6,6 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
-use function BrainGames\evenGames\sortByKey;
 
 //generate array of random progression numbers
 function generateRandomProgression()
@@ -50,7 +49,7 @@ function generateRandomHideNumber($generateProgression)
 }
 
 // genirate progression
-function progressionWithRandomHidenNumber()
+function generateQuestionAndAnswer()
 {
     $generateRandomProgression = generateRandomProgression();
 
@@ -58,11 +57,25 @@ function progressionWithRandomHidenNumber()
 }
 
 //generate random progression array
-function generateThreeProgressions()
+function collectQuestionsAndAnswers()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
-        $result[] = progressionWithRandomHidenNumber();
+        $result[] = generateQuestionAndAnswer();
+    }
+    return $result;
+}
+
+// sort array by key
+function sortByKey($collectQuestionsAndAnswers, $keySearch)
+{
+    $result = [];
+    foreach ($collectQuestionsAndAnswers as $collection) {
+        foreach ($collection as $key => $vol) {
+            if ($key == $keySearch) {
+                $result[] = $vol;
+            }
+        }
     }
     return $result;
 }
@@ -70,12 +83,12 @@ function generateThreeProgressions()
 
 function runProgressionGame()
 {
-    $generateThreeProgressions = generateThreeProgressions();
+    $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
 
-    $progressions = sortByKey($generateThreeProgressions, 'progression');
-    $correctAnswers = sortByKey($generateThreeProgressions, 'correctAnswer');
+    $collectQuestions = sortByKey($collectQuestionsAndAnswers, 'progression');
+    $collectCorrectAnswers = sortByKey($collectQuestionsAndAnswers, 'correctAnswer');
 
-    $combineProgressionsAndCorrectAnswers = array_combine($progressions, $correctAnswers);
+    $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectCorrectAnswers);
 
-    runEngine($combineProgressionsAndCorrectAnswers, "What number is missing in the progression?\n");
+    runEngine($combineQuestiosAndCorrectAnswers, "What number is missing in the progression?\n");
 }

@@ -31,33 +31,3 @@ function runEngine($arrayCombine, $welcome)
     }
     line("Congratulations, %s!", $userName);
 }
-
-// ================================================================================
-
-// generate two random integer
-// return
-//     Array
-//     (
-//         [firstNumber] => 25
-//         [secondNumber] => 42
-//     )
-function generateTwoRandomNumber()
-{
-    $res = [];
-    $res['firstNumber'] = rand(1, 50);
-    $res['secondNumber'] = rand(1, 50);
-    return $res;
-}
-
-// expression array to string
-//     Array
-//     (
-//         [firstNumber] => 'firstNumber'
-//         [sign] => 'sign'
-//         [secondNumber] => 'secondNumber'
-//     )
-//   return =>  "'firstNumber''sign' 'secondNumber'"
-function expressionToString($arr)
-{
-    return "{$arr['firstNumber']} {$arr['sign']} {$arr['secondNumber']}";
-}

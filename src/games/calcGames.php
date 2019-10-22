@@ -4,8 +4,6 @@ namespace BrainGames\calcGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\expressionToString;
-use function BrainGames\General\generateTwoRandomNumber;
 use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
 
@@ -17,12 +15,26 @@ function randomSign()
     return $sign[$random];
 }
 
+// generate two random integer
+// return
+//     Array
+//     (
+//         [firstNumber] => 25
+//         [secondNumber] => 42
+//     )
+function generateCollectTwoRandomNumbers()
+{
+    $result = [];
+    $result['firstNumber'] = rand(1, 50);
+    $result['secondNumber'] = rand(1, 50);
+    return $result;
+}
 
 // add sign to array of number;
-function addRandomSignToExpression($arr)
+function addRandomSignToExpression($expression)
 {
-    $arr['sign'] = randomSign();
-    return $arr;
+    $expression['sign'] = randomSign();
+    return $expression;
 }
 
 // принимает массив типа
@@ -33,26 +45,26 @@ function addRandomSignToExpression($arr)
 //         [secondNumber] => 42
 //     )
 // return => 25 + 42 возвращает результат выражения
-function countExpression($arr)
+function countExpression($expression)
 {
-    if ($arr['sign'] == '+') {
-        return $arr['firstNumber'] + $arr['secondNumber'];
-    } elseif ($arr['sign'] == '-') {
-        return $arr['firstNumber'] - $arr['secondNumber'];
+    if ($expression['sign'] == '+') {
+        return $expression['firstNumber'] + $expression['secondNumber'];
+    } elseif ($expression['sign'] == '-') {
+        return $expression['firstNumber'] - $expression['secondNumber'];
     } else {
-        return $arr['firstNumber'] * $arr['secondNumber'];
+        return $expression['firstNumber'] * $expression['secondNumber'];
     }
 }
 
 // generate expression
 function generateExpression()
 {
-    $arrExp = generateTwoRandomNumber();
-    return addRandomSignToExpression($arrExp);
+    $collect = generateCollectTwoRandomNumbers();
+    return addRandomSignToExpression($collect);
 }
 
 //generate array of three array numbers
-function generateThreeExpressions()
+function generateCollectExpressions()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
@@ -61,21 +73,34 @@ function generateThreeExpressions()
     return $result;
 }
 
+// expression array to string
+//     Array
+//     (
+//         [firstNumber] => 'firstNumber'
+//         [sign] => 'sign'
+//         [secondNumber] => 'secondNumber'
+//     )
+//   return =>  "'firstNumber''sign' 'secondNumber'"
+function expressionToString($arr)
+{
+    return "{$arr['firstNumber']} {$arr['sign']} {$arr['secondNumber']}";
+}
+
 // array string expression
-function stringExpressions($threeExpressions)
+function collectStringExpressions($collectExpressions)
 {
     $result = [];
-    foreach ($threeExpressions as $expression) {
+    foreach ($collectExpressions as $expression) {
         $result[] = expressionToString($expression);
     }
     return $result;
 }
 
 // array correct answer
-function correctAnswers($threeExpressions)
+function collectCorrectAnswers($collectExpressions)
 {
     $result = [];
-    foreach ($threeExpressions as $expression) {
+    foreach ($collectExpressions as $expression) {
         $result[] = countExpression($expression);
     }
     return $result;
@@ -84,12 +109,12 @@ function correctAnswers($threeExpressions)
 // run calc game
 function runCalcGame()
 {
-    $generateThreeExpressions = generateThreeExpressions();
+    $generateCollectExpressions = generateCollectExpressions();
 
-    $threeExpressions = stringExpressions($generateThreeExpressions);
-    $correctAnswers = correctAnswers($generateThreeExpressions);
+    $collectQuestions = collectStringExpressions($generateCollectExpressions);
+    $collectCorrectAnswers = collectCorrectAnswers($generateCollectExpressions);
 
-    $combineOfExpressionsAndAnswers = array_combine($threeExpressions, $correctAnswers);
+    $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectCorrectAnswers);
 
-    runEngine($combineOfExpressionsAndAnswers, "What is the result of the expression?\n");
+    runEngine($combineQuestiosAndCorrectAnswers, "What is the result of the expression?\n");
 }

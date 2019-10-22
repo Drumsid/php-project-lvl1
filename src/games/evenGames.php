@@ -9,13 +9,13 @@ use function BrainGames\General\runEngine;
 use function BrainGames\General\myCongratz;
 
 // генерирует число и проверяет положительное оно или нет, вернет массив [num, bool]
-function generateNumber()
+function generateQuestionAndAnswer()
 {
     $result = [];
     $number = rand(1, 100);
-    $yesOrNo = isEven($number);
+    $evenOrNot = isEven($number);
     $result['number'] = $number;
-    $result['even'] = $yesOrNo;
+    $result['even'] = $evenOrNot;
     return $result;
 }
 
@@ -29,21 +29,21 @@ function isEven($number)
 }
 
 //generate array of three array nambers
-function generateThreeNumbers()
+function collectQuestionsAndAnswers()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
-        $result[] = generateNumber();
+        $result[] = generateQuestionAndAnswer();
     }
     return $result;
 }
 
 // sort array by key
-function sortByKey($threeNumbers, $keySearch)
+function sortByKey($collectQuestionsAndAnswers, $keySearch)
 {
     $result = [];
-    foreach ($threeNumbers as $number) {
-        foreach ($number as $key => $vol) {
+    foreach ($collectQuestionsAndAnswers as $collection) {
+        foreach ($collection as $key => $vol) {
             if ($key == $keySearch) {
                 $result[] = $vol;
             }
@@ -56,12 +56,12 @@ function sortByKey($threeNumbers, $keySearch)
 function runEvenGame()
 {
     //generate array of three array numbers
-    $threeNumbers = generateThreeNumbers();
+    $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
 
-    $numbers = sortByKey($threeNumbers, 'number');
-    $evens = sortByKey($threeNumbers, 'even');
+    $collectQuestions = sortByKey($collectQuestionsAndAnswers, 'number');
+    $collectAnswers = sortByKey($collectQuestionsAndAnswers, 'even');
 
-    $combineNumbersAndCorrectAnswers = array_combine($numbers, $evens);
+    $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectAnswers);
 
-    runEngine($combineNumbersAndCorrectAnswers, "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
+    runEngine($combineQuestiosAndCorrectAnswers, "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
 }

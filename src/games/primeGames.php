@@ -43,9 +43,9 @@ function runPrimeGame()
 {
     $generateThreeRandomNumbers = generateThreeRandomNumbers();
 
-    $correctPrimeAnswers = correctPrimeAnswers($generateThreeRandomNumbers);
+    $collectCorrectAnswers = correctPrimeAnswers($generateThreeRandomNumbers);
 
-    $combinePrimeNumbersAndCorrectAnswers = array_combine($generateThreeRandomNumbers, $correctPrimeAnswers);
+    $combineQuestiosAndCorrectAnswers = array_combine($generateThreeRandomNumbers, $collectCorrectAnswers);
 
-    runEngine($combinePrimeNumbersAndCorrectAnswers, "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
+    runEngine($combineQuestiosAndCorrectAnswers, "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
 }

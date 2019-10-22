@@ -4,8 +4,6 @@ namespace BrainGames\gcdGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\expressionToString;
-use function BrainGames\General\generateTwoRandomNumber;
 use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
 
@@ -29,15 +27,30 @@ function addSpaseSign($arr)
     return $arr;
 }
 
+// generate two random integer
+// return
+//     Array
+//     (
+//         [firstNumber] => 25
+//         [secondNumber] => 42
+//     )
+function generateCollectTwoRandomNumbers()
+{
+    $result = [];
+    $result['firstNumber'] = rand(1, 50);
+    $result['secondNumber'] = rand(1, 50);
+    return $result;
+}
+
 // generate gcd expression
 function generateGcdExpression()
 {
-    $twoRandomNumbers = generateTwoRandomNumber();
-    return addSpaseSign($twoRandomNumbers);
+    $collect = generateCollectTwoRandomNumbers();
+    return addSpaseSign($collect);
 }
 
 //generate array of three array gcd expression
-function generateThreeGcdExpressions()
+function generateGcdExpressions()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
@@ -46,21 +59,35 @@ function generateThreeGcdExpressions()
     return $result;
 }
 
+// expression array to string
+//     Array
+//     (
+//         [firstNumber] => 'firstNumber'
+//         [sign] => 'sign'
+//         [secondNumber] => 'secondNumber'
+//     )
+//   return =>  "'firstNumber''sign' 'secondNumber'"
+function expressionToString($arr)
+{
+    return "{$arr['firstNumber']} {$arr['sign']} {$arr['secondNumber']}";
+}
+
+
 // array of gcd expression
-function threeGcdExpressionsToString($generateGcdExpressions)
+function gcdExpressionsToString($collectGcdExpressions)
 {
     $result = [];
-    foreach ($generateGcdExpressions as $gcdExpression) {
+    foreach ($collectGcdExpressions as $gcdExpression) {
         $result[] = expressionToString($gcdExpression);
     }
     return $result;
 }
 
 // array  of correct gcd answer
-function correctGcdAnswers($generateGcdExpressions)
+function correctGcdAnswers($collectGcdExpressions)
 {
     $result = [];
-    foreach ($generateGcdExpressions as $gcdExpression) {
+    foreach ($collectGcdExpressions as $gcdExpression) {
         $result[] = findGcd($gcdExpression);
     }
     return $result;
@@ -69,12 +96,12 @@ function correctGcdAnswers($generateGcdExpressions)
 
 function runGcdGame()
 {
-    $generateThreeGcdExpressions = generateThreeGcdExpressions();
+    $collectGcdExpressions = generateGcdExpressions();
 
-    $gcdExpressions = threeGcdExpressionsToString($generateThreeGcdExpressions);
-    $correctGcdAnswers = correctGcdAnswers($generateThreeGcdExpressions);
+    $collectQuestions = gcdExpressionsToString($collectGcdExpressions);
+    $collectCorrectAnswers = correctGcdAnswers($collectGcdExpressions);
 
-    $combineGcdExpressionsAndCorrectAnswers = array_combine($gcdExpressions, $correctGcdAnswers);
+    $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectCorrectAnswers);
 
-    runEngine($combineGcdExpressionsAndCorrectAnswers, "Find the greatest common divisor of given numbers.\n");
+    runEngine($combineQuestiosAndCorrectAnswers, "Find the greatest common divisor of given numbers.\n");
 }
