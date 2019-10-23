@@ -7,73 +7,46 @@ use function cli\prompt;
 use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
 
-// find gcd
-function findGcd($arr)
+define("GAME_RULES_GCD", "Find the greatest common divisor of given numbers.\n");
+
+function findGcd($firstInt, $secondInt)
 {
-    while ($arr['firstNumber'] != $arr['secondNumber']) {
-        if ($arr['firstNumber'] > $arr['secondNumber']) {
-            $arr['firstNumber'] -= $arr['secondNumber'];
+    while ($firstInt != $secondInt) {
+        if ($firstInt > $secondInt) {
+            $firstInt -= $secondInt;
         } else {
-            $arr['secondNumber'] -= $arr['firstNumber'];
+            $secondInt -= $firstInt;
         }
     }
-    return $arr['firstNumber'];
+    return $firstInt;
 }
 
-// add space sign
-function addSpaseSign($arr)
-{
-    $arr['sign'] = "";
-    return $arr;
-}
-
-// generate two random integer
-// return
-//     Array
-//     (
-//         [firstNumber] => 25
-//         [secondNumber] => 42
-//     )
-function generateCollectTwoRandomNumbers()
+function generateQuestionAndAnswer()
 {
     $result = [];
-    $result['firstNumber'] = rand(1, 50);
-    $result['secondNumber'] = rand(1, 50);
+    $firstInt = rand(1, 50);
+    $secondInt = rand(1, 50);
+    $findGcd = findGcd($firstInt, $secondInt);
+    $result['firstNumber'] = $firstInt;
+    $result['secondNumber'] = $secondInt;
+    $result['gcd'] = $findGcd;
     return $result;
 }
 
-// generate gcd expression
-function generateGcdExpression()
-{
-    $collect = generateCollectTwoRandomNumbers();
-    return addSpaseSign($collect);
-}
-
-//generate array of three array gcd expression
-function generateGcdExpressions()
+function collectQuestionsAndAnswers()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
-        $result[] = generateGcdExpression();
+        $result[] = generateQuestionAndAnswer();
     }
     return $result;
 }
 
-// expression array to string
-//     Array
-//     (
-//         [firstNumber] => 'firstNumber'
-//         [sign] => 'sign'
-//         [secondNumber] => 'secondNumber'
-//     )
-//   return =>  "'firstNumber''sign' 'secondNumber'"
 function expressionToString($arr)
 {
-    return "{$arr['firstNumber']} {$arr['sign']} {$arr['secondNumber']}";
+    return "{$arr['firstNumber']} {$arr['secondNumber']}";
 }
 
-
-// array of gcd expression
 function gcdExpressionsToString($collectGcdExpressions)
 {
     $result = [];
@@ -83,25 +56,23 @@ function gcdExpressionsToString($collectGcdExpressions)
     return $result;
 }
 
-// array  of correct gcd answer
 function correctGcdAnswers($collectGcdExpressions)
 {
     $result = [];
     foreach ($collectGcdExpressions as $gcdExpression) {
-        $result[] = findGcd($gcdExpression);
+        $result[] = $gcdExpression['gcd'];
     }
     return $result;
 }
 
-
 function runGcdGame()
 {
-    $collectGcdExpressions = generateGcdExpressions();
+    $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
 
-    $collectQuestions = gcdExpressionsToString($collectGcdExpressions);
-    $collectCorrectAnswers = correctGcdAnswers($collectGcdExpressions);
+    $collectQuestions = gcdExpressionsToString($collectQuestionsAndAnswers);
+    $collectCorrectAnswers = correctGcdAnswers($collectQuestionsAndAnswers);
 
     $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectCorrectAnswers);
 
-    runEngine($combineQuestiosAndCorrectAnswers, "Find the greatest common divisor of given numbers.\n");
+    runEngine($combineQuestiosAndCorrectAnswers, GAME_RULES_GCD);
 }

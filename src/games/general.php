@@ -5,19 +5,13 @@ namespace BrainGames\General;
 use function cli\line;
 use function cli\prompt;
 
-// Welcome
-function welcomToGame($welcome)
+//run engine The game
+function runEngine($arrayCombine, $welcome)
 {
     line("Welcome to the Brain Games!\n{$welcome}\n");
     $userName = prompt('May I have your name', $default = false, "? ");
     line("Hello, %s!", $userName);
-    return $userName;
-}
 
-//run engine The game
-function runEngine($arrayCombine, $welcome)
-{
-     $userName = welcomToGame($welcome);
      //run questions
     foreach ($arrayCombine as $question => $correctAnswer) {
         line("Question: {$question}");

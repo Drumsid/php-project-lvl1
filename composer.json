@@ -9,9 +9,9 @@
             "email": "den-sidnay@yandex.ru"
         }
     ],
-  "scripts": {
-    "phpcs": "phpcs"
-  },
+    "scripts": {
+      "phpcs": "phpcs"
+    },
     "bin": [
         "bin/brain-games",
         "bin/brain-even",

@@ -7,6 +7,8 @@ use function cli\prompt;
 use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
 
+define("GAME_RULES_PROGRESSION", "What number is missing in the progression?\n");
+
 //generate array of random progression numbers
 function generateRandomProgression()
 {
@@ -90,5 +92,5 @@ function runProgressionGame()
 
     $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectCorrectAnswers);
 
-    runEngine($combineQuestiosAndCorrectAnswers, "What number is missing in the progression?\n");
+    runEngine($combineQuestiosAndCorrectAnswers, GAME_RULES_PROGRESSION);
 }

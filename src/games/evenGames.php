@@ -8,6 +8,8 @@ use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
 use function BrainGames\General\myCongratz;
 
+define("GAME_RULES_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
+
 // генерирует число и проверяет положительное оно или нет, вернет массив [num, bool]
 function generateQuestionAndAnswer()
 {
@@ -15,7 +17,7 @@ function generateQuestionAndAnswer()
     $number = rand(1, 100);
     $evenOrNot = isEven($number);
     $result['number'] = $number;
-    $result['even'] = $evenOrNot;
+    $result['even'] = $evenOrNot === true ? 'yes' : 'no';
     return $result;
 }
 
@@ -23,9 +25,9 @@ function generateQuestionAndAnswer()
 function isEven($number)
 {
     if ($number % 2 == 0) {
-        return 'yes';
+        return true;
     }
-    return 'no';
+    return false;
 }
 
 //generate array of three array nambers
@@ -63,5 +65,5 @@ function runEvenGame()
 
     $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectAnswers);
 
-    runEngine($combineQuestiosAndCorrectAnswers, "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
+    runEngine($combineQuestiosAndCorrectAnswers, GAME_RULES_EVEN);
 }
