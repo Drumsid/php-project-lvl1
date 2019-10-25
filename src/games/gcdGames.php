@@ -23,13 +23,16 @@ function findGcd($firstInt, $secondInt)
 
 function generateQuestionAndAnswer()
 {
-    $result = [];
+    $expression = [];
     $firstInt = rand(1, 50);
     $secondInt = rand(1, 50);
     $findGcd = findGcd($firstInt, $secondInt);
-    $result['firstNumber'] = $firstInt;
-    $result['secondNumber'] = $secondInt;
-    $result['gcd'] = $findGcd;
+
+    $result = [];
+    $expression['firstNumber'] = $firstInt;
+    $expression['secondNumber'] = $secondInt;
+    $result['question'] = expressionToString($expression);
+    $result['correctAnswer'] = $findGcd;
     return $result;
 }
 
@@ -47,32 +50,9 @@ function expressionToString($arr)
     return "{$arr['firstNumber']} {$arr['secondNumber']}";
 }
 
-function gcdExpressionsToString($collectGcdExpressions)
-{
-    $result = [];
-    foreach ($collectGcdExpressions as $gcdExpression) {
-        $result[] = expressionToString($gcdExpression);
-    }
-    return $result;
-}
-
-function correctGcdAnswers($collectGcdExpressions)
-{
-    $result = [];
-    foreach ($collectGcdExpressions as $gcdExpression) {
-        $result[] = $gcdExpression['gcd'];
-    }
-    return $result;
-}
-
 function runGcdGame()
 {
     $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
 
-    $collectQuestions = gcdExpressionsToString($collectQuestionsAndAnswers);
-    $collectCorrectAnswers = correctGcdAnswers($collectQuestionsAndAnswers);
-
-    $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectCorrectAnswers);
-
-    runEngine($combineQuestiosAndCorrectAnswers, GAME_RULES_GCD);
+    runEngine($collectQuestionsAndAnswers, GAME_RULES_GCD);
 }

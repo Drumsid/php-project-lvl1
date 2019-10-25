@@ -6,14 +6,14 @@ use function cli\line;
 use function cli\prompt;
 
 //run engine The game
-function runEngine($arrayCombine, $welcome)
+function runEngine($collectQuestionsAndAnswers, $welcome)
 {
     line("Welcome to the Brain Games!\n{$welcome}\n");
     $userName = prompt('May I have your name', $default = false, "? ");
     line("Hello, %s!", $userName);
 
      //run questions
-    foreach ($arrayCombine as $question => $correctAnswer) {
+    foreach ($collectQuestionsAndAnswers as ['question' => $question, 'correctAnswer' => $correctAnswer]) {
         line("Question: {$question}");
         $userAnswer = prompt("Your answer");
         if ($userAnswer == $correctAnswer) {

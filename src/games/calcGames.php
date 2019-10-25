@@ -4,7 +4,6 @@ namespace BrainGames\calcGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
 
 define("GAME_RULES_CALCULATOR", "What is the result of the expression?\n");
@@ -15,7 +14,7 @@ function randomSign($sign)
     $random = rand(0, count($sign) - 1);
     return $sign[$random];
 }
-// $sign = ['+', '-', '*']; тут оставить если снифер ругается
+// $sign = ['+', '-', '*']; если тут оставить снифер ругается
 
 /**
  * generate two random integer
@@ -23,13 +22,18 @@ function randomSign($sign)
  * @return array
  * @author Denis
  */
-function generateExpression()
+function generateQuestionAndAnswer()
 {
-    $result = [];
+    $expression = [];
     $sign = ['+', '-', '*'];
-    $result['firstNumber'] = rand(1, 50);
-    $result['secondNumber'] = rand(1, 50);
-    $result['sign'] = randomSign($sign);
+    $expression['firstNumber'] = rand(1, 50);
+    $expression['secondNumber'] = rand(1, 50);
+    $expression['sign'] = randomSign($sign);
+
+    $result = [];
+    $correctAnswer = countExpression($expression);
+    $result['question'] = expressionToString($expression);
+    $result['correctAnswer'] = $correctAnswer;
     return $result;
 }
 
@@ -52,45 +56,17 @@ function countExpression($expression)
     }
 }
 
+function expressionToString($expression)
+{
+    return "{$expression['firstNumber']} {$expression['sign']} {$expression['secondNumber']}";
+}
+
 //generate array of three array numbers
-function generateCollectExpressions()
+function collectQuestionsAndAnswers()
 {
     $result = [];
     for ($i = 0; $i < 3; $i++) {
-        $result[] = generateExpression();
-    }
-    return $result;
-}
-
-/**
- * Convert expression to string
- *
- *@param array $expression
- *
- * @return string
- * @author Denis
- */
-function expressionToString($arr)
-{
-    return "{$arr['firstNumber']} {$arr['sign']} {$arr['secondNumber']}";
-}
-
-// array string expression
-function collectStringExpressions($collectExpressions)
-{
-    $result = [];
-    foreach ($collectExpressions as $expression) {
-        $result[] = expressionToString($expression);
-    }
-    return $result;
-}
-
-// array correct answer
-function collectCorrectAnswers($collectExpressions)
-{
-    $result = [];
-    foreach ($collectExpressions as $expression) {
-        $result[] = countExpression($expression);
+        $result[] = generateQuestionAndAnswer();
     }
     return $result;
 }
@@ -98,12 +74,7 @@ function collectCorrectAnswers($collectExpressions)
 // run calc game
 function runCalcGame()
 {
-    $generateCollectExpressions = generateCollectExpressions();
+    $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
 
-    $collectQuestions = collectStringExpressions($generateCollectExpressions);
-    $collectCorrectAnswers = collectCorrectAnswers($generateCollectExpressions);
-
-    $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectCorrectAnswers);
-
-    runEngine($combineQuestiosAndCorrectAnswers, GAME_RULES_CALCULATOR);
+    runEngine($collectQuestionsAndAnswers, GAME_RULES_CALCULATOR);
 }
