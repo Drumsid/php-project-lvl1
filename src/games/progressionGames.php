@@ -4,7 +4,6 @@ namespace BrainGames\progressionGame;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\welcomToGame;
 use function BrainGames\General\runEngine;
 
 define("GAME_RULES_PROGRESSION", "What number is missing in the progression?\n");
@@ -44,7 +43,7 @@ function generateRandomHideNumber($generateProgression)
         }
     }
 
-    $result['progression'] = implode(" ", $generateRandomHideNumber);
+    $result['question'] = implode(" ", $generateRandomHideNumber);
     $result['correctAnswer'] = $generateProgression[$randomHideKey];
 
     return $result;
@@ -68,29 +67,10 @@ function collectQuestionsAndAnswers()
     return $result;
 }
 
-// sort array by key
-function sortByKey($collectQuestionsAndAnswers, $keySearch)
-{
-    $result = [];
-    foreach ($collectQuestionsAndAnswers as $collection) {
-        foreach ($collection as $key => $vol) {
-            if ($key == $keySearch) {
-                $result[] = $vol;
-            }
-        }
-    }
-    return $result;
-}
-
 
 function runProgressionGame()
 {
     $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
 
-    $collectQuestions = sortByKey($collectQuestionsAndAnswers, 'progression');
-    $collectCorrectAnswers = sortByKey($collectQuestionsAndAnswers, 'correctAnswer');
-
-    $combineQuestiosAndCorrectAnswers = array_combine($collectQuestions, $collectCorrectAnswers);
-
-    runEngine($combineQuestiosAndCorrectAnswers, GAME_RULES_PROGRESSION);
+    runEngine($collectQuestionsAndAnswers, GAME_RULES_PROGRESSION);
 }
