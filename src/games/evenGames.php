@@ -5,6 +5,7 @@ namespace BrainGames\evenGames;
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
+use const BrainGames\general\GAME_ROUNDS;
 
 define("GAME_RULES_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
 
@@ -12,27 +13,23 @@ define("GAME_RULES_EVEN", "Answer 'yes' if the number is even, otherwise answer 
 function generateQuestionAndAnswer()
 {
     $result = [];
-    $number = rand(1, 100);
-    $evenOrNot = isEven($number);
-    $result['question'] = $number;
-    $result['correctAnswer'] = $evenOrNot === true ? 'yes' : 'no';
+    $question = rand(1, 100);
+    $result['question'] = $question;
+    $result['correctAnswer'] = isEven($question) ? 'yes' : 'no';
     return $result;
 }
 
 // проверяем положительное ли число
 function isEven($number)
 {
-    if ($number % 2 == 0) {
-        return true;
-    }
-    return false;
+    return $number % 2 == 0;
 }
 
 //generate array of three array nambers
-function collectQuestionsAndAnswers()
+function collectQuestionsAndAnswers($const)
 {
     $result = [];
-    for ($i = 0; $i < 3; $i++) {
+    for ($i = 0; $i < $const; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
@@ -41,7 +38,7 @@ function collectQuestionsAndAnswers()
 
 function runEvenGame()
 {
-    $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
+    $collectQuestionsAndAnswers = collectQuestionsAndAnswers(GAME_ROUNDS);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULES_EVEN);
 }

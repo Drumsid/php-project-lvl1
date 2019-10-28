@@ -5,6 +5,7 @@ namespace BrainGames\progressionGame;
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
+use const BrainGames\general\GAME_ROUNDS;
 
 define("GAME_RULES_PROGRESSION", "What number is missing in the progression?\n");
 
@@ -58,10 +59,10 @@ function generateQuestionAndAnswer()
 }
 
 //generate random progression array
-function collectQuestionsAndAnswers()
+function collectQuestionsAndAnswers($const)
 {
     $result = [];
-    for ($i = 0; $i < 3; $i++) {
+    for ($i = 0; $i < $const; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
@@ -70,7 +71,7 @@ function collectQuestionsAndAnswers()
 
 function runProgressionGame()
 {
-    $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
+    $collectQuestionsAndAnswers = collectQuestionsAndAnswers(GAME_ROUNDS);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULES_PROGRESSION);
 }

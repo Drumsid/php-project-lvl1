@@ -5,6 +5,7 @@ namespace BrainGames\calcGames;
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
+use const BrainGames\general\GAME_ROUNDS;
 
 define("GAME_RULES_CALCULATOR", "What is the result of the expression?\n");
 
@@ -62,10 +63,10 @@ function expressionToString($expression)
 }
 
 //generate array of three array numbers
-function collectQuestionsAndAnswers()
+function collectQuestionsAndAnswers($const)
 {
     $result = [];
-    for ($i = 0; $i < 3; $i++) {
+    for ($i = 0; $i < $const; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
@@ -74,7 +75,7 @@ function collectQuestionsAndAnswers()
 // run calc game
 function runCalcGame()
 {
-    $collectQuestionsAndAnswers = collectQuestionsAndAnswers();
+    $collectQuestionsAndAnswers = collectQuestionsAndAnswers(GAME_ROUNDS);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULES_CALCULATOR);
 }
