@@ -4,7 +4,7 @@ namespace BrainGames\gcdGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\runEngine;
+use function BrainGames\general\runEngine;
 
 define("GAME_RULES_GCD", "Find the greatest common divisor of given numbers.\n");
 

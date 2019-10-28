@@ -4,7 +4,7 @@ namespace BrainGames\evenGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\runEngine;
+use function BrainGames\general\runEngine;
 
 define("GAME_RULES_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
 

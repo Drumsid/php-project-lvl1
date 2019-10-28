@@ -4,7 +4,7 @@ namespace BrainGames\progressionGame;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\runEngine;
+use function BrainGames\general\runEngine;
 
 define("GAME_RULES_PROGRESSION", "What number is missing in the progression?\n");
 

@@ -4,7 +4,7 @@ namespace BrainGames\calcGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\runEngine;
+use function BrainGames\general\runEngine;
 
 define("GAME_RULES_CALCULATOR", "What is the result of the expression?\n");
 

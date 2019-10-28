@@ -4,7 +4,7 @@ namespace BrainGames\primeGames;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\General\runEngine;
+use function BrainGames\general\runEngine;
 
 define("GAME_RULES_PRIME", "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
 
