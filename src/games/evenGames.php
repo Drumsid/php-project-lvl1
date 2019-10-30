@@ -6,8 +6,6 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
 
-use const BrainGames\general\GAME_ROUNDS;
-
 define("GAME_RULE_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
 
 // генерирует число и проверяет положительное оно или нет, вернет массив [num, bool]

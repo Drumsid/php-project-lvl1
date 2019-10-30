@@ -6,8 +6,6 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
 
-use const BrainGames\general\GAME_ROUNDS;
-
 define("GAME_RULE_CALCULATOR", "What is the result of the expression?\n");
 
 // random znak

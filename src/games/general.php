@@ -5,8 +5,9 @@ namespace BrainGames\general;
 use function cli\line;
 use function cli\prompt;
 
-const GAME_ROUNDS = 3;
-// define('GAME_ROUNDS', 3);
+// const GAME_ROUNDS = 3; //линтер ругается, пробовал public как он советует но не прокатило
+define('GAME_ROUNDS', 3);
+
 
 //run engine The game
 function runEngine($collectQuestionsAndAnswers, $welcome)

@@ -6,8 +6,6 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
 
-use const BrainGames\general\GAME_ROUNDS;
-
 define("GAME_RULE_GCD", "Find the greatest common divisor of given numbers.\n");
 
 function findGcd($firstValue, $secondValue)

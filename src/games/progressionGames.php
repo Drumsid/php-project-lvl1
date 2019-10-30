@@ -6,8 +6,6 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
 
-use const BrainGames\general\GAME_ROUNDS;
-
 define("GAME_RULE_PROGRESSION", "What number is missing in the progression?\n");
 define("COUNT_PROGRESSION", 10);
 

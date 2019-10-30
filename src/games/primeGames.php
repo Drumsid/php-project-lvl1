@@ -6,8 +6,6 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
 
-use const BrainGames\general\GAME_ROUNDS;
-
 define("GAME_RULE_PRIME", "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
 
 function isPrimeNumber($number)
