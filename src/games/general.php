@@ -6,6 +6,7 @@ use function cli\line;
 use function cli\prompt;
 
 const GAME_ROUNDS = 3;
+// define('GAME_ROUNDS', 3);
 
 //run engine The game
 function runEngine($collectQuestionsAndAnswers, $welcome)

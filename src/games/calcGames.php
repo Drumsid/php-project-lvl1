@@ -5,12 +5,13 @@ namespace BrainGames\calcGames;
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
+
 use const BrainGames\general\GAME_ROUNDS;
 
-define("GAME_RULES_CALCULATOR", "What is the result of the expression?\n");
+define("GAME_RULE_CALCULATOR", "What is the result of the expression?\n");
 
 // random znak
-function randomSign($sign)
+function generateRandomSign($sign)
 {
     $random = rand(0, count($sign) - 1);
     return $sign[$random];
@@ -25,15 +26,14 @@ function randomSign($sign)
  */
 function generateQuestionAndAnswer()
 {
-    $expression = [];
     $sign = ['+', '-', '*'];
-    $expression['firstNumber'] = rand(1, 50);
-    $expression['secondNumber'] = rand(1, 50);
-    $expression['sign'] = randomSign($sign);
+    $firstValue = rand(1, 50);
+    $secondValue = rand(1, 50);
+    $sign = generateRandomSign($sign);
 
     $result = [];
-    $correctAnswer = countExpression($expression);
-    $result['question'] = expressionToString($expression);
+    $correctAnswer = countExpression($firstValue, $secondValue, $sign);
+    $result['question'] = expressionToString($firstValue, $secondValue, $sign);
     $result['correctAnswer'] = $correctAnswer;
     return $result;
 }
@@ -46,24 +46,25 @@ function generateQuestionAndAnswer()
  * @return int
  * @author Denis
  */
-function countExpression($expression)
+function countExpression($firstValue, $secondValue, $sign)
 {
-    if ($expression['sign'] == '+') {
-        return $expression['firstNumber'] + $expression['secondNumber'];
-    } elseif ($expression['sign'] == '-') {
-        return $expression['firstNumber'] - $expression['secondNumber'];
-    } else {
-        return $expression['firstNumber'] * $expression['secondNumber'];
+    switch ($sign) {
+        case "+":
+            return $firstValue + $secondValue;
+        case "-":
+            return $firstValue - $secondValue;
+        case "*":
+            return $firstValue * $secondValue;
     }
 }
 
-function expressionToString($expression)
+function expressionToString($firstValue, $secondValue, $sign)
 {
-    return "{$expression['firstNumber']} {$expression['sign']} {$expression['secondNumber']}";
+    return "{$firstValue} {$sign} {$secondValue}";
 }
 
 //generate array of three array numbers
-function collectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($const)
 {
     $result = [];
     for ($i = 0; $i < $const; $i++) {
@@ -75,7 +76,7 @@ function collectQuestionsAndAnswers($const)
 // run calc game
 function runCalcGame()
 {
-    $collectQuestionsAndAnswers = collectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULES_CALCULATOR);
+    runEngine($collectQuestionsAndAnswers, GAME_RULE_CALCULATOR);
 }

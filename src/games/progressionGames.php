@@ -5,12 +5,14 @@ namespace BrainGames\progressionGame;
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
+
 use const BrainGames\general\GAME_ROUNDS;
 
-define("GAME_RULES_PROGRESSION", "What number is missing in the progression?\n");
+define("GAME_RULE_PROGRESSION", "What number is missing in the progression?\n");
+define("COUNT_PROGRESSION", 10);
 
 //generate array of random progression numbers
-function generateRandomProgression()
+function generateRandomProgression($count)
 {
     $result = [];
 
@@ -18,7 +20,7 @@ function generateRandomProgression()
 
     $generateStartNumber = rand(1, 10);
 
-    for ($i = 0, $step = $generateStartNumber; $i < 10; $i++) {
+    for ($i = 0, $step = $generateStartNumber; $i < $count; $i++) {
         if ($i == 0) {
             $result[] = $step;
         } else {
@@ -34,7 +36,7 @@ function generateRandomHideNumber($generateProgression)
 {
     $result = [];
     $generateRandomHideNumber = [];
-    $randomHideKey = rand(1, 8);
+    $randomHideKey = rand(1, COUNT_PROGRESSION - 2);
 
     foreach ($generateProgression as $k => $v) {
         if ($k == $randomHideKey) {
@@ -53,13 +55,13 @@ function generateRandomHideNumber($generateProgression)
 // genirate progression
 function generateQuestionAndAnswer()
 {
-    $generateRandomProgression = generateRandomProgression();
+    $generateRandomProgression = generateRandomProgression(COUNT_PROGRESSION);
 
     return generateRandomHideNumber($generateRandomProgression);
 }
 
 //generate random progression array
-function collectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($const)
 {
     $result = [];
     for ($i = 0; $i < $const; $i++) {
@@ -71,7 +73,7 @@ function collectQuestionsAndAnswers($const)
 
 function runProgressionGame()
 {
-    $collectQuestionsAndAnswers = collectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULES_PROGRESSION);
+    runEngine($collectQuestionsAndAnswers, GAME_RULE_PROGRESSION);
 }

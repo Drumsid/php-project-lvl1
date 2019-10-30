@@ -5,38 +5,35 @@ namespace BrainGames\gcdGames;
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
+
 use const BrainGames\general\GAME_ROUNDS;
 
-define("GAME_RULES_GCD", "Find the greatest common divisor of given numbers.\n");
+define("GAME_RULE_GCD", "Find the greatest common divisor of given numbers.\n");
 
-function findGcd($firstInt, $secondInt)
+function findGcd($firstValue, $secondValue)
 {
-    while ($firstInt != $secondInt) {
-        if ($firstInt > $secondInt) {
-            $firstInt -= $secondInt;
+    while ($firstValue != $secondValue) {
+        if ($firstValue > $secondValue) {
+            $firstValue -= $secondValue;
         } else {
-            $secondInt -= $firstInt;
+            $secondValue -= $firstValue;
         }
     }
-    return $firstInt;
+    return $firstValue;
 }
 
 function generateQuestionAndAnswer()
 {
-    $expression = [];
-    $firstInt = rand(1, 50);
-    $secondInt = rand(1, 50);
-    $findGcd = findGcd($firstInt, $secondInt);
-
     $result = [];
-    $expression['firstNumber'] = $firstInt;
-    $expression['secondNumber'] = $secondInt;
-    $result['question'] = expressionToString($expression);
+    $firstValue = rand(1, 50);
+    $secondValue = rand(1, 50);
+    $findGcd = findGcd($firstValue, $secondValue);
+    $result['question'] = expressionToString($firstValue, $secondValue);
     $result['correctAnswer'] = $findGcd;
     return $result;
 }
 
-function collectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($const)
 {
     $result = [];
     for ($i = 0; $i < $const; $i++) {
@@ -45,14 +42,14 @@ function collectQuestionsAndAnswers($const)
     return $result;
 }
 
-function expressionToString($arr)
+function expressionToString($firstValue, $secondValue)
 {
-    return "{$arr['firstNumber']} {$arr['secondNumber']}";
+    return "{$firstValue} {$secondValue}";
 }
 
 function runGcdGame()
 {
-    $collectQuestionsAndAnswers = collectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULES_GCD);
+    runEngine($collectQuestionsAndAnswers, GAME_RULE_GCD);
 }

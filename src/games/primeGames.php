@@ -5,9 +5,10 @@ namespace BrainGames\primeGames;
 use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\runEngine;
+
 use const BrainGames\general\GAME_ROUNDS;
 
-define("GAME_RULES_PRIME", "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
+define("GAME_RULE_PRIME", "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
 
 function isPrimeNumber($number)
 {
@@ -28,7 +29,7 @@ function generateQuestionAndAnswer()
     return $result;
 }
 
-function collectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($const)
 {
     $result = [];
     for ($i = 0; $i < $const; $i++) {
@@ -41,7 +42,7 @@ function collectQuestionsAndAnswers($const)
 // run prime game
 function runPrimeGame()
 {
-    $collectQuestionsAndAnswers = collectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULES_PRIME);
+    runEngine($collectQuestionsAndAnswers, GAME_RULE_PRIME);
 }
