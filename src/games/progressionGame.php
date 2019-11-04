@@ -1,10 +1,10 @@
 <?php
 
-namespace BrainGames\progressionGame;
+namespace BrainGames\games\progressionGame;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\general\runEngine;
+use function BrainGames\general\general\runEngine;
 
 define("GAME_RULE_PROGRESSION", "What number is missing in the progression?\n");
 define("COUNT_PROGRESSION", 10);

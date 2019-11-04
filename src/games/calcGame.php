@@ -1,14 +1,13 @@
 <?php
 
-namespace BrainGames\calcGames;
+namespace BrainGames\games\calcGame;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\general\runEngine;
+use function BrainGames\general\general\runEngine;
 
 define("GAME_RULE_CALCULATOR", "What is the result of the expression?\n");
 
-// random znak
 function generateRandomSign($sign)
 {
     $random = rand(0, count($sign) - 1);

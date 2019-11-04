@@ -10,4 +10,4 @@ if (file_exists($autoloadPath1)) {
 }
 
 //run gcd game
-BrainGames\gcdGames\runGcdGame();
+BrainGames\games\gcdGame\runGcdGame();

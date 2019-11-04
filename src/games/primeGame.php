@@ -1,10 +1,10 @@
 <?php
 
-namespace BrainGames\primeGames;
+namespace BrainGames\games\primeGame;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\general\runEngine;
+use function BrainGames\general\general\runEngine;
 
 define("GAME_RULE_PRIME", "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
 

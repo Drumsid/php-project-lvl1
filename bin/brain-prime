@@ -10,4 +10,4 @@ if (file_exists($autoloadPath1)) {
 }
 
 // run prime game
-BrainGames\primeGames\runPrimeGame();
+BrainGames\games\primeGame\runPrimeGame();

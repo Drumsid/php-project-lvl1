@@ -1,10 +1,10 @@
 <?php
 
-namespace BrainGames\evenGames;
+namespace BrainGames\games\evenGame;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\general\runEngine;
+use function BrainGames\general\general\runEngine;
 
 define("GAME_RULE_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
 

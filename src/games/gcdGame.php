@@ -1,10 +1,10 @@
 <?php
 
-namespace BrainGames\gcdGames;
+namespace BrainGames\games\gcdGame;
 
 use function cli\line;
 use function cli\prompt;
-use function BrainGames\general\runEngine;
+use function BrainGames\general\general\runEngine;
 
 define("GAME_RULE_GCD", "Find the greatest common divisor of given numbers.\n");
 
