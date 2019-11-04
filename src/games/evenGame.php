@@ -8,7 +8,6 @@ use function BrainGames\general\general\runEngine;
 
 define("GAME_RULE_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
 
-// генерирует число и проверяет положительное оно или нет, вернет массив [num, bool]
 function generateQuestionAndAnswer()
 {
     $result = [];
@@ -18,13 +17,11 @@ function generateQuestionAndAnswer()
     return $result;
 }
 
-// проверяем положительное ли число
 function isEven($number)
 {
     return $number % 2 == 0;
 }
 
-//generate array of three array nambers
 function generateCollectQuestionsAndAnswers($const)
 {
     $result = [];

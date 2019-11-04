@@ -36,8 +36,6 @@ function generateCollectQuestionsAndAnswers($const)
     return $result;
 }
 
-
-// run prime game
 function runPrimeGame()
 {
     $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);

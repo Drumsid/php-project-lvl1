@@ -9,5 +9,4 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-// run progression game
 BrainGames\games\progressionGame\runProgressionGame();

@@ -9,7 +9,6 @@ use function BrainGames\general\general\runEngine;
 define("GAME_RULE_PROGRESSION", "What number is missing in the progression?\n");
 define("COUNT_PROGRESSION", 10);
 
-//generate array of random progression numbers
 function generateRandomProgression($count)
 {
     $result = [];
@@ -29,7 +28,6 @@ function generateRandomProgression($count)
     return $result;
 }
 
-// hide random number in array of random progression numbers
 function generateRandomHideNumber($generateProgression)
 {
     $result = [];
@@ -50,7 +48,6 @@ function generateRandomHideNumber($generateProgression)
     return $result;
 }
 
-// genirate progression
 function generateQuestionAndAnswer()
 {
     $generateRandomProgression = generateRandomProgression(COUNT_PROGRESSION);
@@ -58,7 +55,6 @@ function generateQuestionAndAnswer()
     return generateRandomHideNumber($generateRandomProgression);
 }
 
-//generate random progression array
 function generateCollectQuestionsAndAnswers($const)
 {
     $result = [];

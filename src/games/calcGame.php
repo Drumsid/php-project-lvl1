@@ -7,13 +7,13 @@ use function cli\prompt;
 use function BrainGames\general\general\runEngine;
 
 define("GAME_RULE_CALCULATOR", "What is the result of the expression?\n");
+define('SIGNS', ['+', '-', '*']);
 
 function generateRandomSign($sign)
 {
     $random = rand(0, count($sign) - 1);
     return $sign[$random];
 }
-// $sign = ['+', '-', '*']; если тут оставить снифер ругается
 
 /**
  * generate two random integer
@@ -23,10 +23,9 @@ function generateRandomSign($sign)
  */
 function generateQuestionAndAnswer()
 {
-    $sign = ['+', '-', '*'];
     $firstValue = rand(1, 50);
     $secondValue = rand(1, 50);
-    $sign = generateRandomSign($sign);
+    $sign = generateRandomSign(SIGNS);
 
     $result = [];
     $correctAnswer = countExpression($firstValue, $secondValue, $sign);
@@ -60,7 +59,6 @@ function expressionToString($firstValue, $secondValue, $sign)
     return "{$firstValue} {$sign} {$secondValue}";
 }
 
-//generate array of three array numbers
 function generateCollectQuestionsAndAnswers($const)
 {
     $result = [];
@@ -70,7 +68,6 @@ function generateCollectQuestionsAndAnswers($const)
     return $result;
 }
 
-// run calc game
 function runCalcGame()
 {
     $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
