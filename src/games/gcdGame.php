@@ -6,7 +6,7 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\general\runEngine;
 
-define("GAME_RULE_GCD", "Find the greatest common divisor of given numbers.\n");
+define("GAME_RULE_GCD", "Find the greatest common divisor of given numbers.");
 
 function findGcd($firstValue, $secondValue)
 {
@@ -26,28 +26,24 @@ function generateQuestionAndAnswer()
     $firstValue = rand(1, 50);
     $secondValue = rand(1, 50);
     $findGcd = findGcd($firstValue, $secondValue);
-    $result['question'] = expressionToString($firstValue, $secondValue);
+    $result['question'] = "{$firstValue} {$secondValue}";
     $result['correctAnswer'] = $findGcd;
     return $result;
 }
 
-function generateCollectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($gameRound)
 {
     $result = [];
-    for ($i = 0; $i < $const; $i++) {
+    for ($i = 0; $i < $gameRound; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
 }
 
-function expressionToString($firstValue, $secondValue)
-{
-    return "{$firstValue} {$secondValue}";
-}
 
 function runGcdGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_GCD);
 }

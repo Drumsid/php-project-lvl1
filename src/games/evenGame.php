@@ -6,7 +6,7 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\general\runEngine;
 
-define("GAME_RULE_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.\n");
+define("GAME_RULE_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.");
 
 function generateQuestionAndAnswer()
 {
@@ -22,10 +22,10 @@ function isEven($number)
     return $number % 2 == 0;
 }
 
-function generateCollectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($gameRound)
 {
     $result = [];
-    for ($i = 0; $i < $const; $i++) {
+    for ($i = 0; $i < $gameRound; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
@@ -34,7 +34,7 @@ function generateCollectQuestionsAndAnswers($const)
 
 function runEvenGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_EVEN);
 }

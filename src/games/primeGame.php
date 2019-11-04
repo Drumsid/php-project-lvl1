@@ -6,10 +6,13 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\general\runEngine;
 
-define("GAME_RULE_PRIME", "Answer 'yes' if given number is prime. Otherwise answer 'no'.\n");
+define("GAME_RULE_PRIME", "Answer 'yes' if given number is prime. Otherwise answer 'no'.");
 
-function isPrimeNumber($number)
+function isPrime($number)
 {
+    if (!is_int($number) || $number < 2) {
+        return false;
+    }
     for ($x = 2; $x <= sqrt($number); $x++) {
         if ($number % $x == 0) {
             return false;
@@ -23,14 +26,14 @@ function generateQuestionAndAnswer()
     $result = [];
     $question = rand(2, 100);
     $result['question'] = $question;
-    $result['correctAnswer'] = isPrimeNumber($question) ? 'yes' : 'no';
+    $result['correctAnswer'] = isPrime($question) ? 'yes' : 'no';
     return $result;
 }
 
-function generateCollectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($gameRound)
 {
     $result = [];
-    for ($i = 0; $i < $const; $i++) {
+    for ($i = 0; $i < $gameRound; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
@@ -38,7 +41,7 @@ function generateCollectQuestionsAndAnswers($const)
 
 function runPrimeGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_PRIME);
 }

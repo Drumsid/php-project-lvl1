@@ -6,8 +6,8 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\general\runEngine;
 
-define("GAME_RULE_CALCULATOR", "What is the result of the expression?\n");
-define('SIGNS', ['+', '-', '*']);
+define("GAME_RULE_CALCULATOR", "What is the result of the expression?");
+define('MATH_SIGNS', ['+', '-', '*']);
 
 function generateRandomSign($sign)
 {
@@ -25,11 +25,11 @@ function generateQuestionAndAnswer()
 {
     $firstValue = rand(1, 50);
     $secondValue = rand(1, 50);
-    $sign = generateRandomSign(SIGNS);
+    $sign = generateRandomSign(MATH_SIGNS);
 
     $result = [];
-    $correctAnswer = countExpression($firstValue, $secondValue, $sign);
-    $result['question'] = expressionToString($firstValue, $secondValue, $sign);
+    $correctAnswer = calculateExpression($firstValue, $secondValue, $sign);
+    $result['question'] = "{$firstValue} {$sign} {$secondValue}";
     $result['correctAnswer'] = $correctAnswer;
     return $result;
 }
@@ -42,7 +42,7 @@ function generateQuestionAndAnswer()
  * @return int
  * @author Denis
  */
-function countExpression($firstValue, $secondValue, $sign)
+function calculateExpression($firstValue, $secondValue, $sign)
 {
     switch ($sign) {
         case "+":
@@ -54,15 +54,11 @@ function countExpression($firstValue, $secondValue, $sign)
     }
 }
 
-function expressionToString($firstValue, $secondValue, $sign)
-{
-    return "{$firstValue} {$sign} {$secondValue}";
-}
 
-function generateCollectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($gameRound)
 {
     $result = [];
-    for ($i = 0; $i < $const; $i++) {
+    for ($i = 0; $i < $gameRound; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
@@ -70,7 +66,7 @@ function generateCollectQuestionsAndAnswers($const)
 
 function runCalcGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_CALCULATOR);
 }

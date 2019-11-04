@@ -6,7 +6,7 @@ use function cli\line;
 use function cli\prompt;
 use function BrainGames\general\general\runEngine;
 
-define("GAME_RULE_PROGRESSION", "What number is missing in the progression?\n");
+define("GAME_RULE_PROGRESSION", "What number is missing in the progression?");
 define("COUNT_PROGRESSION", 10);
 
 function generateRandomProgression($count)
@@ -55,10 +55,10 @@ function generateQuestionAndAnswer()
     return generateRandomHideNumber($generateRandomProgression);
 }
 
-function generateCollectQuestionsAndAnswers($const)
+function generateCollectQuestionsAndAnswers($gameRound)
 {
     $result = [];
-    for ($i = 0; $i < $const; $i++) {
+    for ($i = 0; $i < $gameRound; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
@@ -67,7 +67,7 @@ function generateCollectQuestionsAndAnswers($const)
 
 function runProgressionGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUNDS);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_PROGRESSION);
 }

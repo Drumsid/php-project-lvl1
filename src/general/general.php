@@ -5,7 +5,7 @@ namespace BrainGames\general\general;
 use function cli\line;
 use function cli\prompt;
 
-define('GAME_ROUNDS', 3);
+define('GAME_ROUND', 3);
 
 
 function runEngine($collectQuestionsAndAnswers, $welcome)
@@ -20,7 +20,8 @@ function runEngine($collectQuestionsAndAnswers, $welcome)
         if ($userAnswer == $correctAnswer) {
             line("Correct!");
         } else {
-            line("{$userAnswer} is wrong answer ;(. Correct answer was {$correctAnswer}.Let's try again, {$userName}!");
+            line("{$userAnswer} is wrong answer ;(.");
+            line("Correct answer was {$correctAnswer}.Let's try again, {$userName}!");
             die();
         }
     }
