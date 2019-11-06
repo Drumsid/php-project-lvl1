@@ -2,12 +2,12 @@
 
 namespace BrainGames\games\calcGame;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\general\general\runEngine;
+use function BrainGames\general\runEngine;
 
-define("GAME_RULE_CALCULATOR", "What is the result of the expression?");
-define('MATH_SIGNS', ['+', '-', '*']);
+use const BrainGames\general\ROUNDS_COUNT;
+
+const GAME_RULE_CALCULATOR = "What is the result of the expression?";
+const MATH_SIGNS = ['+', '-', '*'];
 
 function generateRandomSign($sign)
 {
@@ -66,7 +66,7 @@ function generateCollectQuestionsAndAnswers($gameRound)
 
 function runCalcGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_CALCULATOR);
 }

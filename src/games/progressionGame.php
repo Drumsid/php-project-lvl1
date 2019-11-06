@@ -2,57 +2,56 @@
 
 namespace BrainGames\games\progressionGame;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\general\general\runEngine;
+use function BrainGames\general\runEngine;
 
-define("GAME_RULE_PROGRESSION", "What number is missing in the progression?");
-define("COUNT_PROGRESSION", 10);
+use const BrainGames\general\ROUNDS_COUNT;
 
-function generateRandomProgression($count)
+const GAME_RULE_PROGRESSION = "What number is missing in the progression?";
+const COUNT_PROGRESSION = 10;
+
+// $startPoint = rand(1, 10);
+// $progressionStep = rand(2, 5);
+
+function generateRandomProgression($count, $startPoint, $progressionStep)
 {
     $result = [];
 
-    $generateCountStep = rand(2, 5);
-
-    $generateStartNumber = rand(1, 10);
-
-    for ($i = 0, $step = $generateStartNumber; $i < $count; $i++) {
+    for ($i = 0, $step = $startPoint; $i < $count; $i++) {
         if ($i == 0) {
             $result[] = $step;
         } else {
-            $step += $generateCountStep;
+            $step += $progressionStep;
             $result[] = $step;
         }
     }
     return $result;
 }
 
-function generateRandomHideNumber($generateProgression)
+
+function generateRandomHideValue($progression, $randomHideKey)
 {
     $result = [];
-    $generateRandomHideNumber = [];
-    $randomHideKey = rand(1, COUNT_PROGRESSION - 2);
+    $progressionWithHideValue = [];
 
-    foreach ($generateProgression as $k => $v) {
+    foreach ($progression as $k => $v) {
         if ($k == $randomHideKey) {
-            $generateRandomHideNumber[] = "..";
+            $progressionWithHideValue[] = "..";
         } else {
-            $generateRandomHideNumber[] = $v;
+            $progressionWithHideValue[] = $v;
         }
     }
 
-    $result['question'] = implode(" ", $generateRandomHideNumber);
-    $result['correctAnswer'] = $generateProgression[$randomHideKey];
+    $result['question'] = implode(" ", $progressionWithHideValue);
+    $result['correctAnswer'] = $progression[$randomHideKey];
 
     return $result;
 }
 
 function generateQuestionAndAnswer()
 {
-    $generateRandomProgression = generateRandomProgression(COUNT_PROGRESSION);
+    $generateRandomProgression = generateRandomProgression(COUNT_PROGRESSION, rand(1, 10), rand(2, 5));
 
-    return generateRandomHideNumber($generateRandomProgression);
+    return generateRandomHideValue($generateRandomProgression, rand(0, COUNT_PROGRESSION - 1));
 }
 
 function generateCollectQuestionsAndAnswers($gameRound)
@@ -67,7 +66,7 @@ function generateCollectQuestionsAndAnswers($gameRound)
 
 function runProgressionGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_PROGRESSION);
 }

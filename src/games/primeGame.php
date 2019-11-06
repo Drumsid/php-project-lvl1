@@ -2,11 +2,11 @@
 
 namespace BrainGames\games\primeGame;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\general\general\runEngine;
+use function BrainGames\general\runEngine;
 
-define("GAME_RULE_PRIME", "Answer 'yes' if given number is prime. Otherwise answer 'no'.");
+use const BrainGames\general\ROUNDS_COUNT;
+
+const GAME_RULE_PRIME = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
 function isPrime($number)
 {
@@ -41,7 +41,7 @@ function generateCollectQuestionsAndAnswers($gameRound)
 
 function runPrimeGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_PRIME);
 }

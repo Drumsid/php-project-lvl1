@@ -2,11 +2,11 @@
 
 namespace BrainGames\games\evenGame;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\general\general\runEngine;
+use function BrainGames\general\runEngine;
 
-define("GAME_RULE_EVEN", "Answer 'yes' if the number is even, otherwise answer 'no'.");
+use const BrainGames\general\ROUNDS_COUNT;
+
+const GAME_RULE_EVEN = "Answer 'yes' if the number is even, otherwise answer 'no'.";
 
 function generateQuestionAndAnswer()
 {
@@ -34,7 +34,7 @@ function generateCollectQuestionsAndAnswers($gameRound)
 
 function runEvenGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_EVEN);
 }

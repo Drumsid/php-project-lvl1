@@ -1,11 +1,11 @@
 <?php
 
-namespace BrainGames\general\general;
+namespace BrainGames\general;
 
 use function cli\line;
 use function cli\prompt;
 
-define('GAME_ROUND', 3);
+const ROUNDS_COUNT = 3;
 
 
 function runEngine($collectQuestionsAndAnswers, $welcome)

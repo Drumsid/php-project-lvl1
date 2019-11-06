@@ -2,11 +2,11 @@
 
 namespace BrainGames\games\gcdGame;
 
-use function cli\line;
-use function cli\prompt;
-use function BrainGames\general\general\runEngine;
+use function BrainGames\general\runEngine;
 
-define("GAME_RULE_GCD", "Find the greatest common divisor of given numbers.");
+use const BrainGames\general\ROUNDS_COUNT;
+
+const GAME_RULE_GCD = "Find the greatest common divisor of given numbers.";
 
 function findGcd($firstValue, $secondValue)
 {
@@ -26,7 +26,7 @@ function generateQuestionAndAnswer()
     $firstValue = rand(1, 50);
     $secondValue = rand(1, 50);
     $findGcd = findGcd($firstValue, $secondValue);
-    $result['question'] = "{$firstValue} {$secondValue}";
+    $result['question'] = "$firstValue $secondValue";
     $result['correctAnswer'] = $findGcd;
     return $result;
 }
@@ -43,7 +43,7 @@ function generateCollectQuestionsAndAnswers($gameRound)
 
 function runGcdGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(GAME_ROUND);
+    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
 
     runEngine($collectQuestionsAndAnswers, GAME_RULE_GCD);
 }
