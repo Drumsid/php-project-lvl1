@@ -9,8 +9,6 @@ use const BrainGames\general\ROUNDS_COUNT;
 const GAME_RULE_PROGRESSION = "What number is missing in the progression?";
 const COUNT_PROGRESSION = 10;
 
-// $startPoint = rand(1, 10);
-// $progressionStep = rand(2, 5);
 
 function generateRandomProgression($count, $startPoint, $progressionStep)
 {
@@ -49,9 +47,11 @@ function generateRandomHideValue($progression, $randomHideKey)
 
 function generateQuestionAndAnswer()
 {
-    $generateRandomProgression = generateRandomProgression(COUNT_PROGRESSION, rand(1, 10), rand(2, 5));
+    $startPoint = rand(1, 10);
+    $progressionStep = rand(2, 5);
+    $randomProgression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
 
-    return generateRandomHideValue($generateRandomProgression, rand(0, COUNT_PROGRESSION - 1));
+    return generateRandomHideValue($randomProgression, rand(0, COUNT_PROGRESSION - 1));
 }
 
 function generateCollectQuestionsAndAnswers($gameRound)

@@ -25,9 +25,9 @@ function generateQuestionAndAnswer()
     $result = [];
     $firstValue = rand(1, 50);
     $secondValue = rand(1, 50);
-    $findGcd = findGcd($firstValue, $secondValue);
+    $correctGcd = findGcd($firstValue, $secondValue);
     $result['question'] = "$firstValue $secondValue";
-    $result['correctAnswer'] = $findGcd;
+    $result['correctAnswer'] = $correctGcd;
     return $result;
 }
 

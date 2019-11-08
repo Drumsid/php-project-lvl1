@@ -9,10 +9,10 @@ use const BrainGames\general\ROUNDS_COUNT;
 const GAME_RULE_CALCULATOR = "What is the result of the expression?";
 const MATH_SIGNS = ['+', '-', '*'];
 
-function generateRandomSign($sign)
+function generateRandomSign($mathSigns)
 {
-    $random = rand(0, count($sign) - 1);
-    return $sign[$random];
+    $randomSign = rand(0, count($mathSigns) - 1);
+    return $mathSigns[$randomSign];
 }
 
 /**
@@ -25,11 +25,11 @@ function generateQuestionAndAnswer()
 {
     $firstValue = rand(1, 50);
     $secondValue = rand(1, 50);
-    $sign = generateRandomSign(MATH_SIGNS);
+    $mathSign = generateRandomSign(MATH_SIGNS);
 
     $result = [];
-    $correctAnswer = calculateExpression($firstValue, $secondValue, $sign);
-    $result['question'] = "{$firstValue} {$sign} {$secondValue}";
+    $correctAnswer = calculateExpression($firstValue, $secondValue, $mathSign);
+    $result['question'] = "{$firstValue} {$mathSign} {$secondValue}";
     $result['correctAnswer'] = $correctAnswer;
     return $result;
 }
@@ -42,9 +42,9 @@ function generateQuestionAndAnswer()
  * @return int
  * @author Denis
  */
-function calculateExpression($firstValue, $secondValue, $sign)
+function calculateExpression($firstValue, $secondValue, $mathSign)
 {
-    switch ($sign) {
+    switch ($mathSign) {
         case "+":
             return $firstValue + $secondValue;
         case "-":
