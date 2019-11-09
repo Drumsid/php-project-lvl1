@@ -26,13 +26,13 @@ function generateRandomProgression($count, $startPoint, $progressionStep)
 }
 
 
-function generateRandomHideValue($progression, $randomHideKey)
+function generateRandomHideValue($progression, $hideValue)
 {
     $result = [];
     $progressionWithHideValue = [];
 
     foreach ($progression as $k => $v) {
-        if ($k == $randomHideKey) {
+        if ($k == $hideValue) {
             $progressionWithHideValue[] = "..";
         } else {
             $progressionWithHideValue[] = $v;
@@ -40,7 +40,7 @@ function generateRandomHideValue($progression, $randomHideKey)
     }
 
     $result['question'] = implode(" ", $progressionWithHideValue);
-    $result['correctAnswer'] = $progression[$randomHideKey];
+    $result['correctAnswer'] = $progression[$hideValue];
 
     return $result;
 }
@@ -49,9 +49,9 @@ function generateQuestionAndAnswer()
 {
     $startPoint = rand(1, 10);
     $progressionStep = rand(2, 5);
-    $randomProgression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
-
-    return generateRandomHideValue($randomProgression, rand(0, COUNT_PROGRESSION - 1));
+    $progression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
+    $hideValue = rand(0, COUNT_PROGRESSION - 1);
+    return generateRandomHideValue($progression, $hideValue);
 }
 
 function generateCollectQuestionsAndAnswers($gameRound)
