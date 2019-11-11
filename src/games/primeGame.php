@@ -30,10 +30,10 @@ function generateQuestionAndAnswer()
     return $result;
 }
 
-function generateCollectQuestionsAndAnswers($gameRound)
+function generateCollectQuestionsAndAnswers($roundsCount)
 {
     $result = [];
-    for ($i = 0; $i < $gameRound; $i++) {
+    for ($i = 0; $i < $roundsCount; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;

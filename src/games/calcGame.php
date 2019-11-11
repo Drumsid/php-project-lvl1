@@ -11,8 +11,7 @@ const MATH_SIGNS = ['+', '-', '*'];
 
 function generateRandomSign($mathSigns)
 {
-    $randomSign = rand(0, count($mathSigns) - 1);
-    return $mathSigns[$randomSign];
+    return $mathSigns[array_rand($mathSigns)];
 }
 
 /**
@@ -30,7 +29,7 @@ function generateQuestionAndAnswer()
     $result = [];
     $correctAnswer = calculateExpression($firstValue, $secondValue, $mathSign);
     $result['question'] = "{$firstValue} {$mathSign} {$secondValue}";
-    $result['correctAnswer'] = $correctAnswer;
+    $result['correctAnswer'] = (string) $correctAnswer;
     return $result;
 }
 
@@ -54,11 +53,10 @@ function calculateExpression($firstValue, $secondValue, $mathSign)
     }
 }
 
-
-function generateCollectQuestionsAndAnswers($gameRound)
+function generateCollectQuestionsAndAnswers($roundsCount)
 {
     $result = [];
-    for ($i = 0; $i < $gameRound; $i++) {
+    for ($i = 0; $i < $roundsCount; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;

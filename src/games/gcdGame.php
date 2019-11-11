@@ -27,19 +27,18 @@ function generateQuestionAndAnswer()
     $secondValue = rand(1, 50);
     $correctGcd = findGcd($firstValue, $secondValue);
     $result['question'] = "$firstValue $secondValue";
-    $result['correctAnswer'] = $correctGcd;
+    $result['correctAnswer'] = (string) $correctGcd;
     return $result;
 }
 
-function generateCollectQuestionsAndAnswers($gameRound)
+function generateCollectQuestionsAndAnswers($roundsCount)
 {
     $result = [];
-    for ($i = 0; $i < $gameRound; $i++) {
+    for ($i = 0; $i < $roundsCount; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
 }
-
 
 function runGcdGame()
 {

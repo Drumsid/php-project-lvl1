@@ -22,15 +22,14 @@ function isEven($number)
     return $number % 2 == 0;
 }
 
-function generateCollectQuestionsAndAnswers($gameRound)
+function generateCollectQuestionsAndAnswers($roundsCount)
 {
     $result = [];
-    for ($i = 0; $i < $gameRound; $i++) {
+    for ($i = 0; $i < $roundsCount; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
 }
-
 
 function runEvenGame()
 {

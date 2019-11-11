@@ -9,7 +9,6 @@ use const BrainGames\general\ROUNDS_COUNT;
 const GAME_RULE_PROGRESSION = "What number is missing in the progression?";
 const COUNT_PROGRESSION = 10;
 
-
 function generateRandomProgression($count, $startPoint, $progressionStep)
 {
     $result = [];
@@ -25,14 +24,13 @@ function generateRandomProgression($count, $startPoint, $progressionStep)
     return $result;
 }
 
-
-function generateRandomHideValue($progression, $hideValue)
+function generateRandomHideValue($progression, $hiddenValue)
 {
     $result = [];
     $progressionWithHideValue = [];
 
     foreach ($progression as $k => $v) {
-        if ($k == $hideValue) {
+        if ($k == $hiddenValue) {
             $progressionWithHideValue[] = "..";
         } else {
             $progressionWithHideValue[] = $v;
@@ -40,7 +38,7 @@ function generateRandomHideValue($progression, $hideValue)
     }
 
     $result['question'] = implode(" ", $progressionWithHideValue);
-    $result['correctAnswer'] = $progression[$hideValue];
+    $result['correctAnswer'] = (string) $progression[$hiddenValue];
 
     return $result;
 }
@@ -50,19 +48,18 @@ function generateQuestionAndAnswer()
     $startPoint = rand(1, 10);
     $progressionStep = rand(2, 5);
     $progression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
-    $hideValue = rand(0, COUNT_PROGRESSION - 1);
-    return generateRandomHideValue($progression, $hideValue);
+    $hiddenValue = rand(0, COUNT_PROGRESSION - 1);
+    return generateRandomHideValue($progression, $hiddenValue);
 }
 
-function generateCollectQuestionsAndAnswers($gameRound)
+function generateCollectQuestionsAndAnswers($roundsCount)
 {
     $result = [];
-    for ($i = 0; $i < $gameRound; $i++) {
+    for ($i = 0; $i < $roundsCount; $i++) {
         $result[] = generateQuestionAndAnswer();
     }
     return $result;
 }
-
 
 function runProgressionGame()
 {
