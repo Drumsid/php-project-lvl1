@@ -8,32 +8,31 @@ use const BrainGames\general\ROUNDS_COUNT;
 
 const GAME_RULE_EVEN = "Answer 'yes' if the number is even, otherwise answer 'no'.";
 
-function generateQuestionAndAnswer()
-{
-    $result = [];
-    $question = rand(1, 100);
-    $result['question'] = $question;
-    $result['correctAnswer'] = isEven($question) ? 'yes' : 'no';
-    return $result;
-}
-
 function isEven($number)
 {
     return $number % 2 == 0;
 }
 
-function generateCollectQuestionsAndAnswers($roundsCount)
+function generateGameData($roundsCount)
 {
+    $generateQuestionAndAnswer = function () {
+        $collect = [];
+        $question = rand(1, 100);
+        $collect['question'] = $question;
+        $collect['correctAnswer'] = isEven($question) ? 'yes' : 'no';
+        return $collect;
+    };
+
     $result = [];
     for ($i = 0; $i < $roundsCount; $i++) {
-        $result[] = generateQuestionAndAnswer();
+        $result[] = $generateQuestionAndAnswer();
     }
     return $result;
 }
 
 function runEvenGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
+    $gameData = generateGameData(ROUNDS_COUNT);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULE_EVEN);
+    runEngine($gameData, GAME_RULE_EVEN);
 }

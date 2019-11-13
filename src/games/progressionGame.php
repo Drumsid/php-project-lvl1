@@ -43,27 +43,26 @@ function generateRandomHideValue($progression, $hiddenValue)
     return $result;
 }
 
-function generateQuestionAndAnswer()
+function generateGameData($roundsCount)
 {
-    $startPoint = rand(1, 10);
-    $progressionStep = rand(2, 5);
-    $progression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
-    $hiddenValue = rand(0, COUNT_PROGRESSION - 1);
-    return generateRandomHideValue($progression, $hiddenValue);
-}
+    $generateQuestionAndAnswer = function () {
+        $startPoint = rand(1, 10);
+        $progressionStep = rand(2, 5);
+        $progression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
+        $hiddenValue = rand(0, COUNT_PROGRESSION - 1);
+        return generateRandomHideValue($progression, $hiddenValue);
+    };
 
-function generateCollectQuestionsAndAnswers($roundsCount)
-{
     $result = [];
     for ($i = 0; $i < $roundsCount; $i++) {
-        $result[] = generateQuestionAndAnswer();
+        $result[] = $generateQuestionAndAnswer();
     }
     return $result;
 }
 
 function runProgressionGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
+    $gameData = generateGameData(ROUNDS_COUNT);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULE_PROGRESSION);
+    runEngine($gameData, GAME_RULE_PROGRESSION);
 }

@@ -15,25 +15,6 @@ function generateRandomSign($mathSigns)
 }
 
 /**
- * generate two random integer
- *
- * @return array
- * @author Denis
- */
-function generateQuestionAndAnswer()
-{
-    $firstValue = rand(1, 50);
-    $secondValue = rand(1, 50);
-    $mathSign = generateRandomSign(MATH_SIGNS);
-
-    $result = [];
-    $correctAnswer = calculateExpression($firstValue, $secondValue, $mathSign);
-    $result['question'] = "{$firstValue} {$mathSign} {$secondValue}";
-    $result['correctAnswer'] = (string) $correctAnswer;
-    return $result;
-}
-
-/**
  * Count expression
  *
  *@param array $expression
@@ -53,18 +34,30 @@ function calculateExpression($firstValue, $secondValue, $mathSign)
     }
 }
 
-function generateCollectQuestionsAndAnswers($roundsCount)
+function generateGameData($roundsCount)
 {
+    $generateQuestionAndAnswer = function () {
+        $firstValue = rand(1, 50);
+        $secondValue = rand(1, 50);
+        $mathSign = generateRandomSign(MATH_SIGNS);
+        $collect = [];
+
+        $correctAnswer = calculateExpression($firstValue, $secondValue, $mathSign);
+        $collect['question'] = "{$firstValue} {$mathSign} {$secondValue}";
+        $collect['correctAnswer'] = (string) $correctAnswer;
+        return $collect;
+    };
+
     $result = [];
     for ($i = 0; $i < $roundsCount; $i++) {
-        $result[] = generateQuestionAndAnswer();
+        $result[] = $generateQuestionAndAnswer();
     }
     return $result;
 }
 
 function runCalcGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
+    $gameData = generateGameData(ROUNDS_COUNT);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULE_CALCULATOR);
+    runEngine($gameData, GAME_RULE_CALCULATOR);
 }

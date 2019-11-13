@@ -21,27 +21,26 @@ function isPrime($number)
     return true;
 }
 
-function generateQuestionAndAnswer()
+function generateGameData($roundsCount)
 {
-    $result = [];
-    $question = rand(2, 100);
-    $result['question'] = $question;
-    $result['correctAnswer'] = isPrime($question) ? 'yes' : 'no';
-    return $result;
-}
+    $generateQuestionAndAnswer = function () {
+        $collect = [];
+        $question = rand(2, 100);
+        $collect['question'] = $question;
+        $collect['correctAnswer'] = isPrime($question) ? 'yes' : 'no';
+        return $collect;
+    };
 
-function generateCollectQuestionsAndAnswers($roundsCount)
-{
     $result = [];
     for ($i = 0; $i < $roundsCount; $i++) {
-        $result[] = generateQuestionAndAnswer();
+        $result[] = $generateQuestionAndAnswer();
     }
     return $result;
 }
 
 function runPrimeGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
+    $gameData = generateGameData(ROUNDS_COUNT);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULE_PRIME);
+    runEngine($gameData, GAME_RULE_PRIME);
 }

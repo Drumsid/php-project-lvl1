@@ -20,29 +20,28 @@ function findGcd($firstValue, $secondValue)
     return $firstValue;
 }
 
-function generateQuestionAndAnswer()
+function generateGameData($roundsCount)
 {
-    $result = [];
-    $firstValue = rand(1, 50);
-    $secondValue = rand(1, 50);
-    $correctGcd = findGcd($firstValue, $secondValue);
-    $result['question'] = "$firstValue $secondValue";
-    $result['correctAnswer'] = (string) $correctGcd;
-    return $result;
-}
+    $generateQuestionAndAnswer = function () {
+        $collect = [];
+        $firstValue = rand(1, 50);
+        $secondValue = rand(1, 50);
+        $correctGcd = findGcd($firstValue, $secondValue);
+        $collect['question'] = "$firstValue $secondValue";
+        $collect['correctAnswer'] = (string) $correctGcd;
+        return $collect;
+    };
 
-function generateCollectQuestionsAndAnswers($roundsCount)
-{
     $result = [];
     for ($i = 0; $i < $roundsCount; $i++) {
-        $result[] = generateQuestionAndAnswer();
+        $result[] = $generateQuestionAndAnswer();
     }
     return $result;
 }
 
 function runGcdGame()
 {
-    $collectQuestionsAndAnswers = generateCollectQuestionsAndAnswers(ROUNDS_COUNT);
+    $gameData = generateGameData(ROUNDS_COUNT);
 
-    runEngine($collectQuestionsAndAnswers, GAME_RULE_GCD);
+    runEngine($gameData, GAME_RULE_GCD);
 }
