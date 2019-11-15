@@ -44,7 +44,7 @@ function runCalcGame()
         $collect['question'] = "{$firstValue} {$mathSign} {$secondValue}";
         $collect['correctAnswer'] = (string) $correctAnswer;
         return $collect;
-  };
+    };
 
     runEngine($generateGameData, GAME_RULE_CALCULATOR);
 }

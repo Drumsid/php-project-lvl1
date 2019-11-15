@@ -28,7 +28,7 @@ function runGcdGame()
         $collect['question'] = "$firstValue $secondValue";
         $collect['correctAnswer'] = (string) $correctGcd;
         return $collect;
-  };
+    };
 
     runEngine($generateGameData, GAME_RULE_GCD);
 }

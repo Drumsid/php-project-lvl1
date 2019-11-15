@@ -49,7 +49,7 @@ function runProgressionGame()
         $progression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
         $hiddenValue = rand(0, COUNT_PROGRESSION - 1);
         return generateRandomHideValue($progression, $hiddenValue);
-  };
+    };
 
     runEngine($generateGameData, GAME_RULE_PROGRESSION);
 }

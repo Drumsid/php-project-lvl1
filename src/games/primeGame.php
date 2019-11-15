@@ -27,7 +27,7 @@ function runPrimeGame()
         $collect['question'] = $question;
         $collect['correctAnswer'] = isPrime($question) ? 'yes' : 'no';
         return $collect;
-  };
+    };
 
     runEngine($generateGameData, GAME_RULE_PRIME);
 }

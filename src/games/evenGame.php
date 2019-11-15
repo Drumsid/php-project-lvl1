@@ -19,6 +19,6 @@ function runEvenGame()
         $collect['question'] = $question;
         $collect['correctAnswer'] = isEven($question) ? 'yes' : 'no';
         return $collect;
-  };
+    };
     runEngine($generateGameData, GAME_RULE_EVEN);
 }
