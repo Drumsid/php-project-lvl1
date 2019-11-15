@@ -4,8 +4,6 @@ namespace BrainGames\games\progressionGame;
 
 use function BrainGames\general\runEngine;
 
-use const BrainGames\general\ROUNDS_COUNT;
-
 const GAME_RULE_PROGRESSION = "What number is missing in the progression?";
 const COUNT_PROGRESSION = 10;
 
@@ -43,9 +41,9 @@ function generateRandomHideValue($progression, $hiddenValue)
     return $result;
 }
 
-function generateGameData($roundsCount)
+function runProgressionGame()
 {
-    $generateQuestionAndAnswer = function () {
+  $generateGameData = function () {
         $startPoint = rand(1, 10);
         $progressionStep = rand(2, 5);
         $progression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
@@ -53,16 +51,5 @@ function generateGameData($roundsCount)
         return generateRandomHideValue($progression, $hiddenValue);
     };
 
-    $result = [];
-    for ($i = 0; $i < $roundsCount; $i++) {
-        $result[] = $generateQuestionAndAnswer();
-    }
-    return $result;
-}
-
-function runProgressionGame()
-{
-    $gameData = generateGameData(ROUNDS_COUNT);
-
-    runEngine($gameData, GAME_RULE_PROGRESSION);
+    runEngine($generateGameData, GAME_RULE_PROGRESSION);
 }

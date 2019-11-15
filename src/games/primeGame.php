@@ -4,8 +4,6 @@ namespace BrainGames\games\primeGame;
 
 use function BrainGames\general\runEngine;
 
-use const BrainGames\general\ROUNDS_COUNT;
-
 const GAME_RULE_PRIME = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
 function isPrime($number)
@@ -21,9 +19,9 @@ function isPrime($number)
     return true;
 }
 
-function generateGameData($roundsCount)
+function runPrimeGame()
 {
-    $generateQuestionAndAnswer = function () {
+  $generateGameData = function () {
         $collect = [];
         $question = rand(2, 100);
         $collect['question'] = $question;
@@ -31,16 +29,5 @@ function generateGameData($roundsCount)
         return $collect;
     };
 
-    $result = [];
-    for ($i = 0; $i < $roundsCount; $i++) {
-        $result[] = $generateQuestionAndAnswer();
-    }
-    return $result;
-}
-
-function runPrimeGame()
-{
-    $gameData = generateGameData(ROUNDS_COUNT);
-
-    runEngine($gameData, GAME_RULE_PRIME);
+    runEngine($generateGameData, GAME_RULE_PRIME);
 }

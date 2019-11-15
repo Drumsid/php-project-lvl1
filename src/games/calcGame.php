@@ -4,8 +4,6 @@ namespace BrainGames\games\calcGame;
 
 use function BrainGames\general\runEngine;
 
-use const BrainGames\general\ROUNDS_COUNT;
-
 const GAME_RULE_CALCULATOR = "What is the result of the expression?";
 const MATH_SIGNS = ['+', '-', '*'];
 
@@ -34,9 +32,9 @@ function calculateExpression($firstValue, $secondValue, $mathSign)
     }
 }
 
-function generateGameData($roundsCount)
+function runCalcGame()
 {
-    $generateQuestionAndAnswer = function () {
+  $generateGameData = function () {
         $firstValue = rand(1, 50);
         $secondValue = rand(1, 50);
         $mathSign = generateRandomSign(MATH_SIGNS);
@@ -48,16 +46,5 @@ function generateGameData($roundsCount)
         return $collect;
     };
 
-    $result = [];
-    for ($i = 0; $i < $roundsCount; $i++) {
-        $result[] = $generateQuestionAndAnswer();
-    }
-    return $result;
-}
-
-function runCalcGame()
-{
-    $gameData = generateGameData(ROUNDS_COUNT);
-
-    runEngine($gameData, GAME_RULE_CALCULATOR);
+    runEngine($generateGameData, GAME_RULE_CALCULATOR);
 }
