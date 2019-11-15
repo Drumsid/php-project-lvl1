@@ -24,7 +24,7 @@ function runEngine($func, $gameRule)
             line("Correct answer was {$collect['correctAnswer']}.Let's try again, {$userName}!");
             die();
         }
-        
+
         if ($result == 3) {
             line("Congratulations, %s!", $userName);
             die();

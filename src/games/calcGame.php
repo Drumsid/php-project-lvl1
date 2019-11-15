@@ -34,7 +34,7 @@ function calculateExpression($firstValue, $secondValue, $mathSign)
 
 function runCalcGame()
 {
-  $generateGameData = function () {
+    $generateGameData = function () {
         $firstValue = rand(1, 50);
         $secondValue = rand(1, 50);
         $mathSign = generateRandomSign(MATH_SIGNS);
@@ -44,7 +44,7 @@ function runCalcGame()
         $collect['question'] = "{$firstValue} {$mathSign} {$secondValue}";
         $collect['correctAnswer'] = (string) $correctAnswer;
         return $collect;
-    };
+  };
 
     runEngine($generateGameData, GAME_RULE_CALCULATOR);
 }

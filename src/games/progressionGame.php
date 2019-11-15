@@ -43,13 +43,13 @@ function generateRandomHideValue($progression, $hiddenValue)
 
 function runProgressionGame()
 {
-  $generateGameData = function () {
+    $generateGameData = function () {
         $startPoint = rand(1, 10);
         $progressionStep = rand(2, 5);
         $progression = generateRandomProgression(COUNT_PROGRESSION, $startPoint, $progressionStep);
         $hiddenValue = rand(0, COUNT_PROGRESSION - 1);
         return generateRandomHideValue($progression, $hiddenValue);
-    };
+  };
 
     runEngine($generateGameData, GAME_RULE_PROGRESSION);
 }
