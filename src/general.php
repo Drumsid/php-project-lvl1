@@ -7,7 +7,7 @@ use function cli\prompt;
 
 const COUNT_ROUNDS = 3;
 
-function runEngine($func, $gameRule)
+function runEngine($generateGameData, $gameRule)
 {
     $result = 0;
     line("Welcome to the Brain Games!");
@@ -15,7 +15,7 @@ function runEngine($func, $gameRule)
     $userName = prompt('May I have your name', $default = false, "? ");
     line("Hello, %s!", $userName);
     for ($i = 0; $i < COUNT_ROUNDS; $i++) {
-        $questionAndAnswer = $func();
+        $questionAndAnswer = $generateGameData();
         line("Question: {$questionAndAnswer['question']}");
         $userAnswer = prompt("Your answer");
         if ($userAnswer == $questionAndAnswer['correctAnswer']) {
