@@ -9,4 +9,4 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-BrainGames\games\primeGame\runPrimeGame();
+BrainGames\games\prime\runPrimeGame();
