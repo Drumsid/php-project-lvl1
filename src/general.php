@@ -5,30 +5,25 @@ namespace BrainGames\general;
 use function cli\line;
 use function cli\prompt;
 
-const COUNT_ROUNDS = 3;
+const ROUNDS_COUNT = 3;
 
 function runEngine($generateGameData, $gameRule)
 {
-    $result = 0;
     line("Welcome to the Brain Games!");
     line($gameRule);
     $userName = prompt('May I have your name', $default = false, "? ");
     line("Hello, %s!", $userName);
-    for ($i = 0; $i < COUNT_ROUNDS; $i++) {
-        $questionAndAnswer = $generateGameData();
-        line("Question: {$questionAndAnswer['question']}");
+    for ($i = 0; $i < ROUNDS_COUNT; $i++) {
+        ['question' => $question, 'correctAnswer' => $correctAnswer] = $generateGameData();
+        line("Question: {$question}");
         $userAnswer = prompt("Your answer");
-        if ($userAnswer == $questionAndAnswer['correctAnswer']) {
-            $result++;
+        if ($userAnswer == $correctAnswer) {
              line("Correct!");
         } else {
             line("{$userAnswer} is wrong answer ;(.");
-            line("Correct answer was {$questionAndAnswer['correctAnswer']}.Let's try again, {$userName}!");
-            die();
-        }
-        if ($result == 3) {
-            line("Congratulations, %s!", $userName);
+            line("Correct answer was {$correctAnswer}.Let's try again, {$userName}!");
             die();
         }
     }
+    line("Congratulations, %s!", $userName);
 }

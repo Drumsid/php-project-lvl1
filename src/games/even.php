@@ -14,11 +14,11 @@ function isEven($number)
 function runEvenGame()
 {
     $generateGameData = function () {
-        $collect = [];
+        $gameData = [];
         $question = rand(1, 100);
-        $collect['question'] = $question;
-        $collect['correctAnswer'] = isEven($question) ? 'yes' : 'no';
-        return $collect;
+        $gameData['question'] = $question;
+        $gameData['correctAnswer'] = isEven($question) ? 'yes' : 'no';
+        return $gameData;
     };
     runEngine($generateGameData, GAME_RULE_EVEN);
 }

@@ -22,11 +22,11 @@ function isPrime($number)
 function runPrimeGame()
 {
     $generateGameData = function () {
-        $collect = [];
+        $gameData = [];
         $question = rand(2, 100);
-        $collect['question'] = $question;
-        $collect['correctAnswer'] = isPrime($question) ? 'yes' : 'no';
-        return $collect;
+        $gameData['question'] = $question;
+        $gameData['correctAnswer'] = isPrime($question) ? 'yes' : 'no';
+        return $gameData;
     };
 
     runEngine($generateGameData, GAME_RULE_PRIME);

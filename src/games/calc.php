@@ -38,12 +38,12 @@ function runCalcGame()
         $firstValue = rand(1, 50);
         $secondValue = rand(1, 50);
         $mathSign = generateRandomSign(MATH_SIGNS);
-        $collect = [];
+        $gameData = [];
 
         $correctAnswer = calculateExpression($firstValue, $secondValue, $mathSign);
-        $collect['question'] = "{$firstValue} {$mathSign} {$secondValue}";
-        $collect['correctAnswer'] = (string) $correctAnswer;
-        return $collect;
+        $gameData['question'] = "{$firstValue} {$mathSign} {$secondValue}";
+        $gameData['correctAnswer'] = (string) $correctAnswer;
+        return $gameData;
     };
 
     runEngine($generateGameData, GAME_RULE_CALCULATOR);

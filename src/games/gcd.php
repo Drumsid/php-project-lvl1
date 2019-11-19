@@ -21,13 +21,13 @@ function findGcd($firstValue, $secondValue)
 function runGcdGame()
 {
     $generateGameData = function () {
-        $collect = [];
+        $gameData = [];
         $firstValue = rand(1, 50);
         $secondValue = rand(1, 50);
         $correctGcd = findGcd($firstValue, $secondValue);
-        $collect['question'] = "$firstValue $secondValue";
-        $collect['correctAnswer'] = (string) $correctGcd;
-        return $collect;
+        $gameData['question'] = "$firstValue $secondValue";
+        $gameData['correctAnswer'] = (string) $correctGcd;
+        return $gameData;
     };
 
     runEngine($generateGameData, GAME_RULE_GCD);
