@@ -21,7 +21,7 @@ function runEngine($generateGameData, $gameRule)
              line("Correct!");
         } else {
             line("{$userAnswer} is wrong answer ;(.");
-            line("Correct answer was {$correctAnswer}.Let's try again, {$userName}!");
+            line("Correct answer was {$correctAnswer}. Let's try again, {$userName}!");
             die();
         }
     }
