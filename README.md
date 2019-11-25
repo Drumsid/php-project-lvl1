@@ -4,7 +4,7 @@
 # Консольное cli приложение Brain-games с мини играми
 ## Глобальная установка и запуск игр
 `composer create-project drumsid/phpproject1 dev-master` - глобальная устновка через composer
-* `bin/brain-even` - запуск игры [brain-even](#brain-even game)
+* [brain-even](#brain-even game)
 * [Installation](#installation)
 * [OO and Chaining](#oo-and-chaining)
 * [Implemented Interfaces](#implemented-interfaces)
