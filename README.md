@@ -15,7 +15,7 @@
 * [Instance methods](#instance-methods)
 
 
-`bin/brain-even` - запуск игры brain-even
+`bin/brain-even` - запуск игры [brain even game](#brain-even-game)
 
 `bin/brain-calc` - запуск игры brain-calc
 
