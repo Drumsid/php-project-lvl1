@@ -4,26 +4,16 @@
 # Консольное cli приложение Brain-games с мини играми
 ## Глобальная установка и запуск игр
 `composer create-project drumsid/phpproject1 dev-master` - глобальная устновка через composer
-* [brain even](#brain-even-game)
-* [Installation](#installation)
-* [OO and Chaining](#oo-and-chaining)
-* [Implemented Interfaces](#implemented-interfaces)
-* [PHP 5.6 Creation](#php-56-creation)
-* [StaticStringy](#staticstringy)
-* [Class methods](#class-methods)
-    * [create](#createmixed-str--encoding-)
-* [Instance methods](#instance-methods)
 
+`bin/brain-even` - запуск игры [brain even](#brain-even-game)
 
-`bin/brain-even` - запуск игры [brain even game](#brain-even-game)
+`bin/brain-calc` - запуск игры [brain calc](#brain-calc-game)
 
-`bin/brain-calc` - запуск игры brain-calc
+`bin/brain-gcd` - запуск игры [brain gcd](#brain-gcd-game)
 
-`bin/brain-gcd` - запуск игры brain-gcd
+`bin/brain-progression` - запуск игры [brain progression](#brain-progression-game)
 
-`bin/brain-progression` - запуск игры brain-progression
-
-`bin/brain-prime` - запуск игры brain-prime
+`bin/brain-prime` - запуск игры [brain prime](#brain-prime-game)
 
 ## brain-even game
 Видео глобальной установки и запуска игры brain-even
